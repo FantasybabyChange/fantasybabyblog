@@ -21,8 +21,8 @@
   <!-- 聚合 -->
 	<modules>
 		<!-- SpringMVC+mybatis -->
-		<!-- <module>../user-dao-mybatis-mvc</module>
-		<module>../user-dao-mabatis</module>
+		<module>../blog_dao</module>
+		<!-- <module>../user-dao-mabatis</module>
 		<module>../user-dao-hibernate</module>
 		<module>../user-service</module>
 		<module>../commom-interface</module>

@@ -1,6 +1,7 @@
 package com.fantasybaby.bean;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -21,6 +22,7 @@ public class Category implements java.io.Serializable {
 	private String categorName;   
 	private CategoryType categorytype;
 	private Date createDate;
+	private List<Privilege> privileges;
 	public Category() {
 	}
 	public String get_uuid() {
@@ -50,5 +52,13 @@ public class Category implements java.io.Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+	public List<Privilege> getPrivileges() {
+		return privileges;
+	}
+	public void setPrivileges(List<Privilege> privileges) {
+		this.privileges = privileges;
+	}
+	public void set_id(int _id) {
+		this._id = _id;
+	}
 }

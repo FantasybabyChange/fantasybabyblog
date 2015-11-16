@@ -6,7 +6,7 @@
 		 <groupId>com.fantasybaby</groupId>
 		  <artifactId>user-parent</artifactId>
 		  <version>0.0.1-SNAPSHOT</version>
-		  <relativePath>../user-parent/pom.xml</relativePath>
+		  <relativePath>../common_parent/pom.xml</relativePath>
 	</parent>
 	
       <artifactId>blog_dao</artifactId>

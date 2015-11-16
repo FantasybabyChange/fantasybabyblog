@@ -19,6 +19,7 @@ public class BlogUser implements java.io.Serializable {
 	private String userName;
 	private String passWord;
 	private Boolean gender;
+	private BlogUserDetail userDetail;
 	private Category category;
 	private Date createDate;
 	private Date modifyDate;
@@ -27,11 +28,11 @@ public class BlogUser implements java.io.Serializable {
 	public String get_uuid() {
 		return _uuid;
 	}
+	public void set_uuid(String _uuid) {
+		this._uuid = _uuid;
+	}
 	public int get_id() {
 		return _id;
-	}
-	public void set_id(int _id) {
-		this._id = _id;
 	}
 	public String getUserName() {
 		return userName;
@@ -69,5 +70,10 @@ public class BlogUser implements java.io.Serializable {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-	
+	public BlogUserDetail getUserDetail() {
+		return userDetail;
+	}
+	public void setUserDetail(BlogUserDetail userDetail) {
+		this.userDetail = userDetail;
+	}
 }
