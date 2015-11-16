@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS user_detail;
 CREATE TABLE _article
 (
    _uuid                CHAR(32),
-   _id                  SMALLINT NOT NULL,
+   _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    title                VARCHAR(100),
    abstract             VARCHAR(300),
    author               VARCHAR(50),
@@ -46,7 +46,7 @@ CREATE TABLE _article
    modify_date          DATETIME,
    publish_date         DATETIME,
    PRIMARY KEY (_id)
-);
+)ENGINE = INNODB;
 
 /*==============================================================*/
 /* Table: _category                                             */
@@ -54,12 +54,12 @@ CREATE TABLE _article
 CREATE TABLE _category
 (
    _uuid                CHAR(32),
-   _id                  SMALLINT NOT NULL,
+   _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    categorname          VARCHAR(30),
    categorytype         SMALLINT,
    create_date          DATETIME,
    PRIMARY KEY (_id)
-);
+)ENGINE = INNODB;
 
 /*==============================================================*/
 /* Table: _privilege                                            */
@@ -67,7 +67,7 @@ CREATE TABLE _category
 CREATE TABLE _privilege
 (
    _uuid                CHAR(32) NOT NULL,
-   pid                  SMALLINT NOT NULL,
+   pid                  SMALLINT NOT NULL AUTO_INCREMENT,
    pname                VARCHAR(30),
    ppath                VARCHAR(300),
    PRIMARY KEY (pid)
@@ -79,7 +79,7 @@ CREATE TABLE _privilege
 CREATE TABLE _tag
 (
    _uuid                CHAR(32),
-   _id                  SMALLINT NOT NULL,
+   _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    tagName              VARCHAR(30),
    PRIMARY KEY (_id)
 )ENGINE = INNODB;
@@ -101,7 +101,7 @@ CREATE TABLE article_tag
 CREATE TABLE blog_user
 (
    _uuid                CHAR(32) NOT NULL,
-   _id                  SMALLINT NOT NULL,
+   _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    username             VARCHAR(20),
    PASSWORD             VARCHAR(300),
    categoryid           SMALLINT,
@@ -129,9 +129,8 @@ CREATE TABLE category_privilege
 CREATE TABLE category_type
 (
    _uuid                CHAR(32),
-   _id                  SMALLINT NOT NULL,
-   categorname          VARCHAR(30),
-   categorytype         SMALLINT,
+   _id                  SMALLINT NOT NULL AUTO_INCREMENT,
+   typename             VARCHAR(30),
    create_date          DATETIME,
    PRIMARY KEY (_id)
 )ENGINE = INNODB;
