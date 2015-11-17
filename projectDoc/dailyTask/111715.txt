@@ -1,0 +1,2 @@
+1.构思一下xml 里面是权限和路径与category的映射关系
+2.完成DAO层和service的搭建。
