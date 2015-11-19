@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
  <!-- 父类pom -->
-  <groupId>com.fantasybaby</groupId>
+  <groupId>com.fantasybabymg</groupId>
   <artifactId>common-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -22,8 +22,8 @@
 	<modules>
 		<!-- SpringMVC+mybatis -->
 		<module>../blog_dao</module>
-		<!-- <module>../user-dao-mabatis</module>
-		<module>../user-dao-hibernate</module>
+		<module>../blog_service</module>
+		<!-- <module>../user-dao-hibernate</module>
 		<module>../user-service</module>
 		<module>../commom-interface</module>
 		<module>../user-common-bean</module> -->
