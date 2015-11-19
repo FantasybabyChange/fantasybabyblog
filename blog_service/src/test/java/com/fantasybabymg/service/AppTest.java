@@ -1,4 +1,4 @@
-package com.fantasybabymg.blog_dao;
+package com.fantasybabymg.service;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
