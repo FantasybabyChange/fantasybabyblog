@@ -14,7 +14,7 @@
            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"   >
 	<import resource="classpath:datasource/blog-datasource.xml" />
 	
-	<context:component-scan base-package="com.fantasybaby.user.service.impl" use-default-filters="true">  
+	<context:component-scan base-package="com.fantasybaby.service.back.impl" use-default-filters="true">  
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>  
     </context:component-scan>  
     
