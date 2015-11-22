@@ -2,13 +2,16 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.fantasybaby.dao.IAccountDao">
+  <mapper namespace="com.fantasybabymg.dao.ICategoryDao">
   	<resultMap type="account" id="accountMap">
   	</resultMap>
-  	<insert id="add" parameterType="account">
-  		INSERT INTO t_account(PASSWORD,NAME,gender) VALUES(#{passWord},#{name},#{gender});
+  	<insert id="addCategory" parameterType="category">
+  		INSERT INTO _category(_uuid,categoryname,parentid,create_date) VALUES(#{_uuid},#{categoryName},
+  		<if test="parentCategory != null and parentCategory != '' ">
+				#{parentCategory._id},
+			</if>now());
   	</insert>
-  	<update id="update" parameterType="account">
+  	<!-- <update id="update" parameterType="account">
      	update t_account
 		<set>
 			<if test="name != null and name != '' ">
@@ -25,11 +28,11 @@
 			</if>
 		</set>
 		where ID = #{id}
-  	</update>
-  	<delete id="delete"  parameterType="int">
+  	</update> -->
+  	<delete id="deleteUser"  parameterType="int">
   		delete from t_account where id=#{id}
   	</delete>
-  	<select id="load"  parameterType="int" resultType="account">
+  	<!-- <select id="load"  parameterType="int" resultType="account">
 		select * from t_account where id=#{id}
   	</select>
   	<select id="findAll" resultMap="accountMap">
@@ -40,5 +43,5 @@
   	</select>
   	<select id="findPageCount"  resultType="int">
   		SELECT count(id) FROM t_account  
-  	</select>
+  	</select> -->
   </mapper>

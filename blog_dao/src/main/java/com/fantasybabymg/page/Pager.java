@@ -1,4 +1,4 @@
-package com.fantasybaby.page;
+package com.fantasybabymg.page;
 
 import java.util.List;
 /**

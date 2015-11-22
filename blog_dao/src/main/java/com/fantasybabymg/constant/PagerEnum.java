@@ -1,4 +1,4 @@
-package com.fantasybaby.constant;
+package com.fantasybabymg.constant;
 
 public enum PagerEnum {
 	/**

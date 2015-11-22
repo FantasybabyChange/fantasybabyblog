@@ -1,4 +1,4 @@
-package com.fantasybaby.db;
+package com.fantasybabymg.db;
 
 
 import java.io.InputStream;

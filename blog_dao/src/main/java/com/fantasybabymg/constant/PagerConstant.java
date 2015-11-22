@@ -1,4 +1,4 @@
-package com.fantasybaby.constant;
+package com.fantasybabymg.constant;
 
 public class PagerConstant {
 	public static final int PAGESIZE_HIBNERNATE = 3;

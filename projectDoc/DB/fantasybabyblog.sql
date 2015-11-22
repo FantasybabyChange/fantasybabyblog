@@ -55,8 +55,8 @@ CREATE TABLE _category
 (
    _uuid                CHAR(32),
    _id                  SMALLINT NOT NULL AUTO_INCREMENT,
-   categorname          VARCHAR(30),
-   categorytype         SMALLINT,
+   categoryname          VARCHAR(30),
+   parentid         SMALLINT,
    create_date          DATETIME,
    PRIMARY KEY (_id)
 )ENGINE = INNODB;
@@ -123,17 +123,6 @@ CREATE TABLE category_privilege
    PRIMARY KEY (_uuid)
 )ENGINE = INNODB;
 
-/*==============================================================*/
-/* Table: category_type                                         */
-/*==============================================================*/
-CREATE TABLE category_type
-(
-   _uuid                CHAR(32),
-   _id                  SMALLINT NOT NULL AUTO_INCREMENT,
-   typename             VARCHAR(30),
-   create_date          DATETIME,
-   PRIMARY KEY (_id)
-)ENGINE = INNODB;
 
 /*==============================================================*/
 /* Table: user_detail                                           */

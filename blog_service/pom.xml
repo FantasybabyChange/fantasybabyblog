@@ -28,6 +28,11 @@
 	    	<artifactId>blog_dao</artifactId>
 	    	<version>${project.version}</version>
     </dependency>
+    <dependency>
+	    	<groupId>${project.groupId}</groupId>
+	    	<artifactId>fantasybaby_util</artifactId>
+	    	<version>${project.version}</version>
+    </dependency>
 	 <dependency>  
             <groupId>org.springframework</groupId>  
             <artifactId>spring-test</artifactId>

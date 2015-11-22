@@ -1,4 +1,4 @@
-package com.fantasybaby.bean;
+package com.fantasybabymg.bean;
 
 import java.util.Date;
 import java.util.List;
@@ -19,8 +19,8 @@ public class Category implements java.io.Serializable {
 	private static final long serialVersionUID = 1997578557697679352L;
 	private String _uuid;
 	private int _id;
-	private String categorName;   
-	private CategoryType categorytype;
+	private String categoryName;   
+	private Category parentCategory;
 	private Date createDate;
 	private List<Privilege> privileges;
 	public Category() {
@@ -34,17 +34,17 @@ public class Category implements java.io.Serializable {
 	public int get_id() {
 		return _id;
 	}
-	public String getCategorName() {
-		return categorName;
+	public String getCategoryName() {
+		return categoryName;
 	}
-	public void setCategorName(String categorName) {
-		this.categorName = categorName;
+	public void setCategoryName(String categorName) {
+		this.categoryName = categorName;
 	}
-	public CategoryType getCategorytype() {
-		return categorytype;
+	public Category getParentCategory() {
+		return parentCategory;
 	}
-	public void setCategorytype(CategoryType categorytype) {
-		this.categorytype = categorytype;
+	public void setParentCategory(Category parentCategory) {
+		this.parentCategory = parentCategory;
 	}
 	public Date getCreateDate() {
 		return createDate;

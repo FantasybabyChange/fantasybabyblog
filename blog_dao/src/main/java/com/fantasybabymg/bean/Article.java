@@ -1,4 +1,4 @@
-package com.fantasybaby.bean;
+package com.fantasybabymg.bean;
 
 import java.util.Date;
 import java.util.List;
@@ -8,8 +8,10 @@ import java.util.List;
  * @author FantasyBaby
  *
  */
-public class Tag implements java.io.Serializable {
-	private static final long serialVersionUID = 6021798784451029767L;
+public class Article implements java.io.Serializable {
+
+	private static final long serialVersionUID = -5128387147702905248L;
+	
 	private String _uuid;
 	private int _id;
 	private String title;
@@ -22,8 +24,8 @@ public class Tag implements java.io.Serializable {
 	private Date createDate;
 	private Date modifyDate;
 	private Date publishDate;
-	private List<Article> articles;
-	public Tag() {
+	private List<Tag> tags;
+	public Article() {
 	}
 	public String get_uuid() {
 		return _uuid;
@@ -97,10 +99,10 @@ public class Tag implements java.io.Serializable {
 	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
 	}
-	public List<Article> getArticles() {
-		return articles;
+	public List<Tag> getTags() {
+		return tags;
 	}
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
+	public void setTag(List<Tag> tags) {
+		this.tags = tags;
 	}
 }

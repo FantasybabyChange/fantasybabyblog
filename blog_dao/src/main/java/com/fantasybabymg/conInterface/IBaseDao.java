@@ -1,9 +1,9 @@
-package com.fantasybaby.conInterface;
+package com.fantasybabymg.conInterface;
 
 import java.util.List;
 import java.util.Map;
 
-import com.fantasybaby.page.Pager;
+import com.fantasybabymg.page.Pager;
 
 public interface IBaseDao<T> {
 	public  void add(T t);

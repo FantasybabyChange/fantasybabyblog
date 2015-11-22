@@ -1,6 +1,6 @@
 package com.fantasybaby.service.back;
 
-import com.fantasybaby.bean.BlogUser;
+import com.fantasybabymg.bean.BlogUser;
 
 /**
  * 

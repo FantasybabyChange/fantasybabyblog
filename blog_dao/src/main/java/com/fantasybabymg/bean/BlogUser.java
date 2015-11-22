@@ -1,4 +1,4 @@
-package com.fantasybaby.bean;
+package com.fantasybabymg.bean;
 
 import java.util.Date;
 
