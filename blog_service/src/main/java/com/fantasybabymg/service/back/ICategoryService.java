@@ -1,4 +1,5 @@
-package com.fantasybaby.service.back;
+package com.fantasybabymg.service.back;
+
 
 import com.fantasybabymg.bean.Category;
 
@@ -9,4 +10,5 @@ import com.fantasybabymg.bean.Category;
  */
 public interface ICategoryService {
 	public boolean addCategory(Category category)throws Exception;
+	public java.util.List<Category> findCategory()throws Exception;
 }

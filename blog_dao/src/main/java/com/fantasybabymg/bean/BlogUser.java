@@ -18,7 +18,6 @@ public class BlogUser implements java.io.Serializable {
 	private int _id;
 	private String userName;
 	private String passWord;
-	private Boolean gender;
 	private BlogUserDetail userDetail;
 	private Category category;
 	private Date createDate;
@@ -45,12 +44,6 @@ public class BlogUser implements java.io.Serializable {
 	}
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
-	}
-	public Boolean getGender() {
-		return gender;
-	}
-	public void setGender(Boolean gender) {
-		this.gender = gender;
 	}
 	public Category getCategory() {
 		return category;

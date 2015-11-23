@@ -1,11 +1,12 @@
-package com.fantasybaby.service.back.impl;
+package com.fantasybabymg.service.back.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fantasybaby.service.back.ICategoryService;
 import com.fantasybabymg.bean.Category;
 import com.fantasybabymg.dao.ICategoryDao;
+import com.fantasybabymg.exception.FantasyBabyException;
+import com.fantasybabymg.service.back.ICategoryService;
 import com.fantasybabymg.util.GUIDUtil;
 /**
  * 
@@ -15,21 +16,24 @@ import com.fantasybabymg.util.GUIDUtil;
 @Service("categoryService")
 public class CategoryServiceImpl implements ICategoryService {
 	@Autowired
-	private ICategoryDao categoryrDao;
+	private ICategoryDao categoryDao;
 	@Override
-	public boolean addCategory(Category category){
+	public boolean addCategory(Category category)throws Exception{
 		boolean isPass = false;
 		try {
 			if (category != null) {
 				category.set_uuid(GUIDUtil.getUUid());
-				categoryrDao.addCategory(category);
+				categoryDao.addCategory(category);
 				isPass = true;
 			}else{
-				throw new Exception("null project");
+				throw new FantasyBabyException("category is null",CategoryServiceImpl.class);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return isPass;
+	}
+	@Override
+	public java.util.List<Category> findCategory() throws Exception {
+		return categoryDao.findCategory();
 	}
 }
