@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS user_detail;
 /*==============================================================*/
 CREATE TABLE _article
 (
-   _uuid                CHAR(128),
+   _uuid                CHAR(36),
    _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    title                VARCHAR(100),
    abstract             VARCHAR(300),
@@ -53,7 +53,7 @@ CREATE TABLE _article
 /*==============================================================*/
 CREATE TABLE _category
 (
-   _uuid                CHAR(128),
+   _uuid                CHAR(36),
    _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    categoryname          VARCHAR(30),
    parentid         SMALLINT,
@@ -66,10 +66,12 @@ CREATE TABLE _category
 /*==============================================================*/
 CREATE TABLE _privilege
 (
-   _uuid                CHAR(128) NOT NULL,
+   _uuid                CHAR(36) NOT NULL,
    pid                  SMALLINT NOT NULL AUTO_INCREMENT,
    pname                VARCHAR(30),
+   pcode                VARCHAR(50),
    ppath                VARCHAR(300),
+   parentid             SMALLINT,
    PRIMARY KEY (pid)
 )ENGINE = INNODB;
 
@@ -78,7 +80,7 @@ CREATE TABLE _privilege
 /*==============================================================*/
 CREATE TABLE _tag
 (
-   _uuid               CHAR(128),
+   _uuid               CHAR(36),
    _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    tagName              VARCHAR(30),
    PRIMARY KEY (_id)
@@ -89,7 +91,7 @@ CREATE TABLE _tag
 /*==============================================================*/
 CREATE TABLE article_tag
 (
-   _uuid               CHAR(128) NOT NULL,
+   _uuid               CHAR(36) NOT NULL,
    tagid                SMALLINT,
    userid               SMALLINT,
    PRIMARY KEY (_uuid)
@@ -100,7 +102,7 @@ CREATE TABLE article_tag
 /*==============================================================*/
 CREATE TABLE blog_user
 (
-   _uuid               CHAR(128) NOT NULL,
+   _uuid               CHAR(36) NOT NULL,
    _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    username             VARCHAR(20),
    PASSWORD             VARCHAR(300),
@@ -117,7 +119,7 @@ ALTER TABLE blog_user COMMENT 'user in blog.they have their own category.like ad
 /*==============================================================*/
 CREATE TABLE category_privilege
 (
-   _uuid               CHAR(128) NOT NULL,
+   _uuid               CHAR(36) NOT NULL,
    privilegeid          SMALLINT,
    categoryid           SMALLINT,
    PRIMARY KEY (_uuid)
@@ -129,7 +131,7 @@ CREATE TABLE category_privilege
 /*==============================================================*/
 CREATE TABLE user_detail
 (
-   _uuid               CHAR(128) NOT NULL,
+   _uuid               CHAR(36) NOT NULL,
    userid               SMALLINT,
    NAME                 VARCHAR(20),
    sex                  BOOL,
