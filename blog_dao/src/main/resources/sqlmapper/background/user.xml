@@ -24,6 +24,9 @@
   		where 
   		</if> 
   	</select>
+  	<delete id="deleteUser"  parameterType="int">
+  		delete from blog_user where _id=#{id}
+  	</delete>
   	<!-- <update id="update" parameterType="account">
      	update t_account
 		<set>
@@ -42,9 +45,7 @@
 		</set>
 		where ID = #{id}
   	</update> -->
-  	<delete id="deleteUser"  parameterType="int">
-  		delete from t_account where id=#{id}
-  	</delete>
+  	
   	<!-- <select id="load"  parameterType="int" resultType="account">
 		select * from t_account where id=#{id}
   	</select>

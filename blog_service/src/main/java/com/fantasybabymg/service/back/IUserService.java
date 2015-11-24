@@ -13,4 +13,5 @@ import com.fantasybabymg.exception.FantasyBabyException;
 public interface IUserService {
 	public boolean addUser(BlogUser user)throws FantasyBabyException;
 	public List<BlogUser> findUsers()throws FantasyBabyException;
+	public boolean deleteUser(int id)throws FantasyBabyException;
 }

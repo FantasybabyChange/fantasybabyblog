@@ -1,4 +1,4 @@
-package com.fantasybabymg.test;
+/*package com.fantasybabymg.test;
 
 import java.util.List;
 
@@ -39,6 +39,15 @@ public class UserTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+	@Test
+	public void testdelUser(){
+//		BlogUser user = new BlogUser();
+		try {
+		boolean deleteUser = userService.deleteUser(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
+*/

@@ -19,6 +19,13 @@ public class FantasyBabyException extends Exception{
 		super(message);
 		_log = Logger.getLogger(_class);
 		_log.error(message);
+		_log.error(message);
+	}
+	public FantasyBabyException(Exception e,Class<?> _class) {
+		super(e);
+		_log = Logger.getLogger(_class);
+		_log.error(e.getMessage());
+		_log.error(e.getStackTrace());
 	}
 
 }

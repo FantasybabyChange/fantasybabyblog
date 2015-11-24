@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.fantasybabymg.dao.IPrivilegeDao">
+  	<resultMap type="privilege" id="privilegeMap">
+  	    <result column="pId" property="pId" />
+  	    <result column="pName" property="pName" />
+  	    <result column="pCode" property="pCode" />
+  	    <result column="pPath" property="pPath" /> 
+  	    <association property="parentPrivilege" column="" javaType="privilege">
+		   <id property="pId" column="parentid"/>
+		</association>
+  	</resultMap>
+  	 <sql id="privilegeColumn">
+	  pId,
+	  pName,
+	  pCode,
+	  pPath,
+	  parentid
+	 </sql>
+	 <!-- insert only one -->
+  	<insert id="addPrivilege" parameterType="privilege">
+  		INSERT INTO _privilege(_uuid,pName,pCode,pPath
+  		<if test="parentPrivilege != null and parentPrivilege != '' ">
+				,parentid
+			</if>) VALUES(#{_uuid},#{pName},
+  		<if test="parentPrivilege != null and parentPrivilege != '' ">
+				#{parentPrivilege.pId},
+			</if>#{pCode},#{pPath});
+  	</insert>
+  	<select id="findPrivilege"  resultMap="privilegeMap">
+  		SELECT <include refid="privilegeColumn"></include> FROM _privilege  
+  	</select>
+  	<delete id="deletePrivilege"  parameterType="int">
+  		delete from _privilege where pid=#{id}
+  	</delete>
+  	<!-- insert list -->
+  	<!-- <insert id="addprivilege" parameterType="privilege">
+  		INSERT INTO _privilege(_uuid,privilegename,
+  		<if test="parentprivilege != null and parentprivilege != '' ">
+				parentid,
+		</if>create_date) VALUES(#{_uuid},#{privilegeName},
+  		<if test="parentprivilege != null and parentprivilege != '' ">
+				#{parentprivilege._id},
+			</if>now());
+  	</insert> -->
+  	<!-- <update id="update" parameterType="account">
+     	update t_account
+		<set>
+			<if test="name != null and name != '' ">
+				NAME = #{name},
+			</if>
+			<if test="passWord != null and passWord != '' ">
+				PASSWORD = #{passWord},
+			</if>
+			<if test="gender != null ">
+				GENDER = #{gender},
+			</if>
+			<if test="photo!= null and  photo != '' ">
+				PHOTO = #{photo},
+			</if>
+		</set>
+		where ID = #{id}
+  	</update> -->
+  	
+  	
+  </mapper>

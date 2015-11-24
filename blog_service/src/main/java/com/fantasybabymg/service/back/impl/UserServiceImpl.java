@@ -40,4 +40,15 @@ public class UserServiceImpl implements IUserService {
 	public List<BlogUser> findUsers() {
 		return userDao.findUser(null);
 	}
+	@Override
+	public boolean deleteUser(int id) throws FantasyBabyException {
+		boolean isPass = false;
+		try {
+			userDao.deleteUser(id);
+			isPass = true;
+		} catch (Exception e) {
+			throw new FantasyBabyException(e,UserServiceImpl.class);
+		}
+		return isPass;
+	}
 }

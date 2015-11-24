@@ -6,15 +6,16 @@ package com.fantasybabymg.bean;
  *
  */
 public class Privilege implements java.io.Serializable {
-	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8646567150287530772L;
+	private static final long serialVersionUID = -7108857935325256818L;
 	private String _uuid;
 	private int pId;
 	private String pName;
+	private String pCode;
 	private String pPath;
+	private Privilege parentPrivilege;
 	public Privilege() {
 	}
 	public String get_uuid() {
@@ -29,16 +30,28 @@ public class Privilege implements java.io.Serializable {
 	public void setpId(int pId) {
 		this.pId = pId;
 	}
-	public String getpName() {
+	public String getPName() {
 		return pName;
 	}
-	public void setpName(String pName) {
+	public void setPName(String pName) {
 		this.pName = pName;
 	}
-	public String getpPath() {
+	public String getPPath() {
 		return pPath;
 	}
-	public void setpPath(String pPath) {
+	public void setPPath(String pPath) {
 		this.pPath = pPath;
+	}
+	public String getPCode() {
+		return pCode;
+	}
+	public void setPCode(String pCode) {
+		this.pCode = pCode;
+	}
+	public Privilege getParentPrivilege() {
+		return parentPrivilege;
+	}
+	public void setParentPrivilege(Privilege parentPrivilege) {
+		this.parentPrivilege = parentPrivilege;
 	}
 }
