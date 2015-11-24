@@ -17,4 +17,6 @@ public interface IPrivilegeService {
 	public List<Privilege> findPrivilege()throws FantasyBabyException;
 	
 	public boolean deletePrivilege(int id)throws FantasyBabyException;
+	
+	public boolean addPrivilegesBatch(List<Privilege> privileges)throws FantasyBabyException;
 }

@@ -1,5 +1,6 @@
-package com.fantasybabymg.test;
+/*package com.fantasybabymg.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -48,4 +49,31 @@ public class PrivilegeTest {
 		}
 		
 	}
+	@Test
+	public void testInserBatchPrivilege(){
+		Privilege privilege = new Privilege();
+		privilege.setPName("插入");
+		privilege.setPCode("insert");
+		privilege.setPPath("/inser.do");
+		Privilege privilege1 = new Privilege();
+		privilege1.setPName("删除");
+		privilege1.setPCode("del");
+		privilege1.setPPath("/del.do");
+		Privilege privilege2 = new Privilege();
+		privilege2.setPName("更新");
+		privilege2.setPCode("update");
+		privilege2.setPPath("/update.do");
+		privilege2.setParentPrivilege(privilege2);
+		List<Privilege> list = new ArrayList<Privilege>();
+		list.add(privilege);
+		list.add(privilege1);
+		list.add(privilege2);
+		try {
+		PrivilegeService.addPrivilegesBatch(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
+*/

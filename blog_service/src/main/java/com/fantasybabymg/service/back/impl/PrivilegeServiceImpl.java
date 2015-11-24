@@ -50,4 +50,20 @@ public class PrivilegeServiceImpl implements IPrivilegeService {
 		}
 		return isPass;
 	}
+	@Override
+	public boolean addPrivilegesBatch(List<Privilege> privileges)
+			throws FantasyBabyException {
+		int result = -1;
+		if (privileges != null) {
+			try {
+				privileges.forEach(privilege -> privilege.set_uuid(GUIDUtil.getUUid()));
+				result = privilegeDao.addPrivilegesBatch(privileges);
+			} catch (Exception e) {
+				throw new FantasyBabyException(e, PrivilegeServiceImpl.class);
+			}
+		}else{
+			throw new FantasyBabyException("can't batch insert  the collection is empty", PrivilegeServiceImpl.class);
+		}
+		return result >= 0;
+	}
 }

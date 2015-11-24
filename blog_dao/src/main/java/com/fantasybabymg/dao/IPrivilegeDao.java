@@ -14,4 +14,6 @@ public interface IPrivilegeDao {
 	
 	public List<Privilege> findPrivilege();
 	
+	public int addPrivilegesBatch(List<Privilege> list);
+	
 }

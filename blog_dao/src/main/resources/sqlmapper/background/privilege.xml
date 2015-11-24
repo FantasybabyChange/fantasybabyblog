@@ -27,7 +27,14 @@
 			</if>) VALUES(#{_uuid},#{pName},
   		<if test="parentPrivilege != null and parentPrivilege != '' ">
 				#{parentPrivilege.pId},
-			</if>#{pCode},#{pPath});
+		</if>#{pCode},#{pPath});
+  	</insert>
+  	<!-- insert many -->
+  	<insert id="addPrivilegesBatch" parameterType="java.util.List">
+  		INSERT INTO _privilege(_uuid,pName,pCode,pPath,parentid) VALUES 
+		<foreach collection="list" item="item" index="index" separator="," >  
+        (#{item._uuid},#{item.pName},#{item.pCode},#{item.pPath},#{item.parentPrivilege.pId})  
+    </foreach>
   	</insert>
   	<select id="findPrivilege"  resultMap="privilegeMap">
   		SELECT <include refid="privilegeColumn"></include> FROM _privilege  
