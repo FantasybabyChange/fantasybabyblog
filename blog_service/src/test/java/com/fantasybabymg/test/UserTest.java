@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fantasybabymg.bean.BlogUser;
+import com.fantasybabymg.bean.BlogUserDetail;
 import com.fantasybabymg.bean.Category;
 import com.fantasybabymg.service.back.IUserService;
 public class UserTest {
@@ -23,6 +24,17 @@ public class UserTest {
 		user.setCategory(category);
 		user.setPassWord("123");
 		user.setUserName("FantasyBaby");
+		BlogUserDetail ud = new BlogUserDetail();
+		ud.setAddress("上海虹口");
+		ud.setEmail("fantasybabymg@gmail.com");
+		ud.setHometown("陕西宝鸡");
+		ud.setImage("head.jpg");
+		ud.setName("刘");
+		ud.setNickname("FantasyBaby");
+		ud.setPhone("123456");
+		ud.setProfession("程序猿");
+		ud.setSex(0);
+		user.setUserDetail(ud);
 		try {
 		userService.addUser(user);
 		} catch (Exception e) {

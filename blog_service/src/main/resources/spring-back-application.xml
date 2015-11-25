@@ -37,7 +37,7 @@
     </tx:advice>
     
     <aop:config expose-proxy="true">
-        <aop:pointcut id="services" expression="execution(* com.fantasybaby.user.service.impl.*.*(..))" />
+        <aop:pointcut id="services" expression="execution(* com.fantasybabymg.service.back.impl.*.*(..))" />
         <aop:advisor pointcut-ref="services" advice-ref="txAdvice"/>
     </aop:config>
 		

@@ -15,7 +15,7 @@
 	  passWord,
 	  create_date
 	 </sql>
-  	<insert id="addUser" parameterType="user">
+  	<insert id="addUser" parameterType="user" useGeneratedKeys="true" keyProperty="_id">
   		INSERT INTO blog_user(_uuid,username,password,categoryid,create_date) VALUES(#{_uuid},#{userName},#{passWord},
   		#{category._id},now());
   	</insert>

@@ -5,6 +5,7 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.fantasybabymg.bean.BlogUser" alias="user"/>
+  		<typeAlias type="com.fantasybabymg.bean.BlogUserDetail" alias="userDetail"/>
   		<typeAlias type="com.fantasybabymg.bean.Category" alias="category"/>
   		<typeAlias type="com.fantasybabymg.bean.Privilege" alias="privilege"/>
   	</typeAliases>

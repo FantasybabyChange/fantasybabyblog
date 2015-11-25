@@ -13,13 +13,14 @@ public class BlogUserDetail implements java.io.Serializable {
 	private String _uuid;
 	private String name;
 	private String nickname;
-	private boolean sex;
+	private int sex;
 	private String phone;
 	private String email;
-	private String adress;
+	private String address;
 	private String hometown;
 	private String profession;
 	private String image;
+	private BlogUser user;
 	public BlogUserDetail() {
 	}
 	public String get_uuid() {
@@ -40,12 +41,6 @@ public class BlogUserDetail implements java.io.Serializable {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public boolean isSex() {
-		return sex;
-	}
-	public void setSex(boolean sex) {
-		this.sex = sex;
-	}
 	public String getPhone() {
 		return phone;
 	}
@@ -57,12 +52,6 @@ public class BlogUserDetail implements java.io.Serializable {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getAdress() {
-		return adress;
-	}
-	public void setAdress(String adress) {
-		this.adress = adress;
 	}
 	public String getHometown() {
 		return hometown;
@@ -81,6 +70,24 @@ public class BlogUserDetail implements java.io.Serializable {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+	public BlogUser getUser() {
+		return user;
+	}
+	public void setUser(BlogUser user) {
+		this.user = user;
+	}
+	public int getSex() {
+		return sex;
+	}
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

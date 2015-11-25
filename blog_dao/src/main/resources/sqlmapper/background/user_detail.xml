@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.fantasybabymg.dao.IUserDetailDao">
+  	<resultMap type="userDetail" id="userDetailMap">
+  		<result column="_id" property="_id" />
+  	    <result column="name" property="name" />
+  	    <result column="nickname" property="nickname" />
+  	    <result column="sex" property="sex" />
+  	    <result column="phone" property="phone" />
+  	    <result column="email" property="email" />
+  	    <result column="address" property="address" />
+  	    <result column="hometown" property="hometown" />
+  	    <result column="profession" property="profession" />
+  	    <result column="image" property="image" />
+  	</resultMap>
+  	<sql id="userDetailColumn">
+	  name,
+	  nickname,
+	  sex,
+	  phone,
+	  email,
+	  adress,
+	  hometown,
+	  profession,
+	  image
+	 </sql>
+  	<insert id="addUserDetail" parameterType="userDetail">
+  		INSERT INTO user_detail(_uuid,name,nickname,sex,phone,email,address,hometown,profession,image,userid) 
+  		VALUES(#{_uuid},#{name},#{nickname},#{sex},#{phone},#{email},#{address},#{hometown},#{profession},#{image},${user._id});
+  	</insert>
+  	<select id="findUserDetailByUserId" parameterType="int" resultMap="userDetailMap">
+  		SELECT <include refid="userDetailColumn"></include> FROM user_detail <if test="id > 0 ">
+  		where userid=#{id}
+  		</if> 
+  	</select>
+  	<delete id="updateUserDetail"  parameterType="int">
+  		delete from user_detail where userid=#{id}
+  	</delete>
+  	<!-- <update id="update" parameterType="account">
+     	update t_account
+		<set>
+			<if test="name != null and name != '' ">
+				NAME = #{name},
+			</if>
+			<if test="passWord != null and passWord != '' ">
+				PASSWORD = #{passWord},
+			</if>
+			<if test="gender != null ">
+				GENDER = #{gender},
+			</if>
+			<if test="photo!= null and  photo != '' ">
+				PHOTO = #{photo},
+			</if>
+		</set>
+		where ID = #{id}
+  	</update> -->
+  	
+  	<!-- <select id="load"  parameterType="int" resultType="account">
+		select * from t_account where id=#{id}
+  	</select>
+  	<select id="findAll" resultMap="accountMap">
+  		select *from t_account
+  	</select>
+  	<select id="findPager" parameterType="map" resultMap="accountMap">
+  		SELECT *FROM t_account LIMIT #{pageStart},#{pageEnd} 
+  	</select>
+  	<select id="findPageCount"  resultType="int">
+  		SELECT count(id) FROM t_account  
+  	</select> -->
+  </mapper>
