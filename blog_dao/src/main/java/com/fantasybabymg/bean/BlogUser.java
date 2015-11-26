@@ -18,6 +18,7 @@ public class BlogUser implements java.io.Serializable {
 	private int _id;
 	private String userName;
 	private String passWord;
+	private int status;
 	private BlogUserDetail userDetail;
 	private Category category;
 	private Date createDate;
@@ -69,4 +70,14 @@ public class BlogUser implements java.io.Serializable {
 	public void setUserDetail(BlogUserDetail userDetail) {
 		this.userDetail = userDetail;
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+	
 }

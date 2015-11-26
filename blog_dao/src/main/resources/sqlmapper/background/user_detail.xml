@@ -21,7 +21,7 @@
 	  sex,
 	  phone,
 	  email,
-	  adress,
+	  address,
 	  hometown,
 	  profession,
 	  image
@@ -30,12 +30,10 @@
   		INSERT INTO user_detail(_uuid,name,nickname,sex,phone,email,address,hometown,profession,image,userid) 
   		VALUES(#{_uuid},#{name},#{nickname},#{sex},#{phone},#{email},#{address},#{hometown},#{profession},#{image},${user._id});
   	</insert>
-  	<select id="findUserDetailByUserId" parameterType="int" resultMap="userDetailMap">
-  		SELECT <include refid="userDetailColumn"></include> FROM user_detail <if test="id > 0 ">
-  		where userid=#{id}
-  		</if> 
+  	<select id="findUserDetailByUserId" parameterType="int" resultType="userDetail">
+  		SELECT <include refid="userDetailColumn"></include> FROM user_detail where userid=#{id}
   	</select>
-  	<delete id="updateUserDetail"  parameterType="int">
+  	<delete id="deleteUserDetail"  parameterType="int">
   		delete from user_detail where userid=#{id}
   	</delete>
   	<!-- <update id="update" parameterType="account">

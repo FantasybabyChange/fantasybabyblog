@@ -1,4 +1,4 @@
-/*package com.fantasybabymg.test;
+package com.fantasybabymg.test;
 
 import java.util.List;
 
@@ -9,12 +9,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.fantasybabymg.bean.BlogUser;
 import com.fantasybabymg.bean.BlogUserDetail;
 import com.fantasybabymg.bean.Category;
+import com.fantasybabymg.service.back.IUserDetailService;
 import com.fantasybabymg.service.back.IUserService;
 public class UserTest {
 	private IUserService userService;
+	private IUserDetailService userDetailService;
 	@Before
 	public void before(){
-		userService = (IUserService) new ClassPathXmlApplicationContext("classpath:spring-back-application.xml").getBean("userService");
+		ClassPathXmlApplicationContext cx = new ClassPathXmlApplicationContext("classpath:spring-back-application.xml");
+		userService = (IUserService) cx.getBean("userService");
+		userDetailService = (IUserDetailService) cx.getBean("userDetailService");
 	}
 	@Test
 	public void testAddUser(){
@@ -24,6 +28,7 @@ public class UserTest {
 		user.setCategory(category);
 		user.setPassWord("123");
 		user.setUserName("FantasyBaby");
+		user.setStatus(0);
 		BlogUserDetail ud = new BlogUserDetail();
 		ud.setAddress("上海虹口");
 		ud.setEmail("fantasybabymg@gmail.com");
@@ -47,7 +52,8 @@ public class UserTest {
 //		BlogUser user = new BlogUser();
 		try {
 		List<BlogUser> findUsers = userService.findUsers();
-		System.out.println(findUsers);
+		findUsers.forEach(user -> System.out.println(user.getUserName()));
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,5 +67,14 @@ public class UserTest {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	public void testFindUserDetail(){
+//		BlogUser user = new BlogUser();
+		try {
+		BlogUserDetail userDetail = userDetailService.findUserDetail(1);
+		System.out.println(userDetail.getAddress());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
-*/

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
  * @author FantasyBaby
  *
  */
-public class FantasyBabyException extends Exception{
+public class FantasyBabyException extends RuntimeException{
 	/**
 	 * 
 	 */

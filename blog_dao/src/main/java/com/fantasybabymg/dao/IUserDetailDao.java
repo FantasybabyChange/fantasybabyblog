@@ -1,7 +1,5 @@
 package com.fantasybabymg.dao;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import com.fantasybabymg.bean.BlogUserDetail;
@@ -18,5 +16,5 @@ public interface IUserDetailDao {
 	
 	public int deleteUserDetail(int id);
 	
-	public List<BlogUserDetail> findUserDetailByUserId(int id);
+	public BlogUserDetail findUserDetailByUserId(int id);
 }

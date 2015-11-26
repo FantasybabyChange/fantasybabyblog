@@ -7,6 +7,7 @@
   		<result column="_id" property="_id" />
   	    <result column="username" property="userName" />
   	    <result column="password" property="passWord" />
+  	    <result column="status" property="status" />
   	    <result column="create_date" property="createDate" />
   	</resultMap>
   	<sql id="categoryColumn">
@@ -16,7 +17,7 @@
 	  create_date
 	 </sql>
   	<insert id="addUser" parameterType="user" useGeneratedKeys="true" keyProperty="_id">
-  		INSERT INTO blog_user(_uuid,username,password,categoryid,create_date) VALUES(#{_uuid},#{userName},#{passWord},
+  		INSERT INTO blog_user(_uuid,username,password,status,categoryid,create_date) VALUES(#{_uuid},#{userName},#{passWord},#{status},
   		#{category._id},now());
   	</insert>
   	<select id="findUser" parameterType="map" resultMap="userMap">

@@ -107,6 +107,7 @@ CREATE TABLE blog_user
    username             VARCHAR(20),
    PASSWORD             VARCHAR(300),
    categoryid           SMALLINT,
+   STATUS               TINYINT,
    create_date          DATETIME,
    modify_date          DATETIME,
    PRIMARY KEY (_id)
