@@ -1,4 +1,4 @@
-/*package com.fantasybabymg.test;
+package com.fantasybabymg.test;
 
 import java.util.List;
 
@@ -40,4 +40,3 @@ public class CategoryTest {
 		
 	}
 }
-*/

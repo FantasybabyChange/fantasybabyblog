@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.fantasybabymg.bean.BlogUser;
 import com.fantasybabymg.bean.BlogUserDetail;
+import com.fantasybabymg.context.SystemContext;
 import com.fantasybabymg.dao.IUserDao;
 import com.fantasybabymg.dao.IUserDetailDao;
 import com.fantasybabymg.exception.FantasyBabyException;
 import com.fantasybabymg.service.back.IUserService;
+import com.fantasybabymg.ubean.Criterion;
 import com.fantasybabymg.util.EncryptUtil;
 import com.fantasybabymg.util.GUIDUtil;
 @Service("userService")
@@ -43,9 +45,17 @@ public class UserServiceImpl implements IUserService {
 			}
 		return isPass;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<BlogUser> findUsers(Map<String, String> criterion) {
-		return userDao.findUserAllInformation(criterion);
+	public List<BlogUser> findUsers() {
+		Criterion<Object> criterionMap = SystemContext.getCriterionMap();
+		Object criterion = criterionMap.getCriterion();
+		List<BlogUser> users = null;
+		if (criterion instanceof Map) {
+			Map<String, Object> map = (Map<String, Object>) criterion;
+			users = userDao.findUserAllInformation(map);
+		}
+		return users;
 	}
 	@Override
 	public boolean deleteUser(int id) throws FantasyBabyException {

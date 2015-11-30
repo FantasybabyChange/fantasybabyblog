@@ -43,9 +43,17 @@
 				ca.`categoryname`
 				FROM blog_user bu LEFT JOIN user_detail ud ON bu.`_id` = ud.`userid`
  				LEFT JOIN _category ca ON ca.`_id` = bu.`categoryid` 
- 				<if test="map != null">
-		  		where 
-		  		</if> 
+		  		where
+		  		    1=1
+		  			<if test="username != null and username != '' ">
+		  			and bu.username LIKE '%${username}%' 
+		  			</if>
+		  			<if test="userid != null">
+		  				and bu._id=#{userid}
+		  			</if>
+		  			<if test="status != null">
+		  				and bu.status=#{status}
+		  			</if>
   	</select>
   	<delete id="deleteUser"  parameterType="int">
   		delete from blog_user where _id=#{id}

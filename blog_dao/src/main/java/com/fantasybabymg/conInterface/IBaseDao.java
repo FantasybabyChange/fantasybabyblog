@@ -3,7 +3,7 @@ package com.fantasybabymg.conInterface;
 import java.util.List;
 import java.util.Map;
 
-import com.fantasybabymg.page.Pager;
+import com.fantasybabymg.ubean.Pager;
 
 public interface IBaseDao<T> {
 	public  void add(T t);

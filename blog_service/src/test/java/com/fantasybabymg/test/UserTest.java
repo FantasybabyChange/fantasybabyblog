@@ -1,6 +1,8 @@
 package com.fantasybabymg.test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +11,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.fantasybabymg.bean.BlogUser;
 import com.fantasybabymg.bean.BlogUserDetail;
 import com.fantasybabymg.bean.Category;
+import com.fantasybabymg.context.SystemContext;
 import com.fantasybabymg.service.back.IUserDetailService;
 import com.fantasybabymg.service.back.IUserService;
+import com.fantasybabymg.ubean.Criterion;
 public class UserTest {
 	private IUserService userService;
 	private IUserDetailService userDetailService;
@@ -51,7 +55,15 @@ public class UserTest {
 	public void testFindUser(){
 //		BlogUser user = new BlogUser();
 		try {
-		List<BlogUser> findUsers = userService.findUsers(null);
+			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("username", "f");
+//			map.put("userid",'1');
+			map.put("status", "");
+			Criterion<Object> cri = new Criterion<Object>();
+			cri.setCriterion(map);
+			SystemContext.setCriterionMap(cri);
+			
+			List<BlogUser> findUsers = userService.findUsers();
 		findUsers.forEach(user -> System.out.println(user.getUserName()+ user.getCategory().getCategoryName()+"" +user.getUserDetail().getAddress()));
 		
 		} catch (Exception e) {

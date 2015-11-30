@@ -1,4 +1,6 @@
-package com.fantasybabymg.page;
+package com.fantasybabymg.context;
+
+import com.fantasybabymg.ubean.Criterion;
 
 public class SystemContext {
 	/**
@@ -15,6 +17,7 @@ public class SystemContext {
 	 */
 	private static ThreadLocal<String> pageOrder = new ThreadLocal<String>();
 	
+	private static ThreadLocal<Criterion<Object>> criterionMap = new ThreadLocal<Criterion<Object>>();
 	public static void setPageSize(int _pageSize){
 		pageSize.set(_pageSize);
 	}
@@ -45,4 +48,15 @@ public class SystemContext {
 	public static void removePageOrder(){
 		pageOrder.remove(); 
 	}
+	
+	public static void setCriterionMap(Criterion<Object> _criterionMap){
+		criterionMap.set(_criterionMap);
+	}
+	public static Criterion<Object> getCriterionMap(){
+		return criterionMap.get();
+	}
+	public static void removeCriterionMap(){
+		criterionMap.remove(); 
+	}
+	
 }
