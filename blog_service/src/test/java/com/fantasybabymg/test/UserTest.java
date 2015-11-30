@@ -51,8 +51,8 @@ public class UserTest {
 	public void testFindUser(){
 //		BlogUser user = new BlogUser();
 		try {
-		List<BlogUser> findUsers = userService.findUsers();
-		findUsers.forEach(user -> System.out.println(user.getUserName()));
+		List<BlogUser> findUsers = userService.findUsers(null);
+		findUsers.forEach(user -> System.out.println(user.getUserName()+ user.getCategory().getCategoryName()+"" +user.getUserDetail().getAddress()));
 		
 		} catch (Exception e) {
 			e.printStackTrace();

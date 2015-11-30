@@ -1,6 +1,7 @@
 package com.fantasybabymg.service.back.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,8 @@ public class UserServiceImpl implements IUserService {
 		return isPass;
 	}
 	@Override
-	public List<BlogUser> findUsers() {
-		return userDao.findUser(null);
+	public List<BlogUser> findUsers(Map<String, String> criterion) {
+		return userDao.findUserAllInformation(criterion);
 	}
 	@Override
 	public boolean deleteUser(int id) throws FantasyBabyException {

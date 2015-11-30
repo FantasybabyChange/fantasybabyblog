@@ -8,6 +8,6 @@ import com.fantasybabymg.bean.BlogUser;
 public interface IUserDao {
 	public int addUser(BlogUser user);
 	public int deleteUser(int id);
-	public List<BlogUser> findUser(Map<String, String> map);
+	public List<BlogUser> findUserAllInformation(Map<String, String> criterion);
 	
 }

@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.fantasybabymg.dao.IUserDetailDao">
   	<resultMap type="userDetail" id="userDetailMap">
-  		<result column="_id" property="_id" />
   	    <result column="name" property="name" />
   	    <result column="nickname" property="nickname" />
   	    <result column="sex" property="sex" />

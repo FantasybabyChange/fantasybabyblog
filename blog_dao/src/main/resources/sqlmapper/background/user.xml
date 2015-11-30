@@ -9,8 +9,25 @@
   	    <result column="password" property="passWord" />
   	    <result column="status" property="status" />
   	    <result column="create_date" property="createDate" />
+  	    <result column="modify_date" property="modifyDate" />
+  	    <association property="userDetail" column="ud" javaType="userDetail">
+	  	    <result column="name" property="name" />
+	  	    <result column="nickname" property="nickname" />
+	  	    <result column="sex" property="sex" />
+	  	    <result column="phone" property="phone" />
+	  	    <result column="email" property="email" />
+	  	    <result column="address" property="address" />
+	  	    <result column="hometown" property="hometown" />
+	  	    <result column="profession" property="profession" />
+	  	    <result column="image" property="image" />
+  	    </association>
+  	    <association property="category" column="ca" javaType="category">
+  	    	<result column="_id" property="_id" />
+	  	    <result column="categoryname" property="categoryName" />
+	  	    <result column="create_date" property="createDate" />
+  	    </association>
   	</resultMap>
-  	<sql id="categoryColumn">
+  	<sql id="userColumn">
 	  _id,
 	  username,
 	  passWord,
@@ -20,10 +37,15 @@
   		INSERT INTO blog_user(_uuid,username,password,status,categoryid,create_date) VALUES(#{_uuid},#{userName},#{passWord},#{status},
   		#{category._id},now());
   	</insert>
-  	<select id="findUser" parameterType="map" resultMap="userMap">
-  		SELECT <include refid="categoryColumn"></include> FROM blog_user <if test="map != null">
-  		where 
-  		</if> 
+  	<select id="findUserAllInformation" parameterType="map" resultMap="userMap">
+  		SELECT bu.`_id`,bu.`username`,bu.`PASSWORD`,bu.`STATUS`,bu.`create_date`,bu.`modify_date`,
+				ud.`NAME`,ud.`nickname`,ud.`phone`,ud.`profession`,ud.`address`,ud.`hometown`,ud.`image`,ud.`sex`,
+				ca.`categoryname`
+				FROM blog_user bu LEFT JOIN user_detail ud ON bu.`_id` = ud.`userid`
+ 				LEFT JOIN _category ca ON ca.`_id` = bu.`categoryid` 
+ 				<if test="map != null">
+		  		where 
+		  		</if> 
   	</select>
   	<delete id="deleteUser"  parameterType="int">
   		delete from blog_user where _id=#{id}
