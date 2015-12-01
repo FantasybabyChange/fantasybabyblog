@@ -1,0 +1,2 @@
+1.complete the relationship of privilge and category.
+2.complete the article insert and search.

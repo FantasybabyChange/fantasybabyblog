@@ -10,6 +10,12 @@
   	    <association property="parentCategory" column="" javaType="category">
 		   <id property="_id" column="parentid"/>
 		</association>
+		<collection property="privileges" ofType="privilege">
+			<id  property="pId" column="pid"/>
+			<result property="pName" column="pname"/>
+			<result property="pCode" column="pcode"/>
+			<result property="pPath" column="ppath"/>
+		</collection>
   	</resultMap>
   	 <sql id="categoryColumn">
 	  _id,
@@ -25,6 +31,14 @@
   		<if test="parentCategory != null and parentCategory != '' ">
 				#{parentCategory._id},
 			</if>now());
+  	</insert>
+  	<insert id="addCategoryPrivilege" parameterType="java.util.List">
+  		INSERT INTO category_privilege(_uuid,privilegeid,categoryid) 
+  		VALUES
+		<foreach collection="list" item="item" index="index" separator=","> 
+		     (#{item._id}, #{item.privilegeId},#{item.categoryId}) 
+	    </foreach>;
+  		
   	</insert>
   	<!-- <update id="update" parameterType="account">
      	update t_account

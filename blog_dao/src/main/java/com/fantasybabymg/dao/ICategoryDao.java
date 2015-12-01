@@ -11,5 +11,10 @@ public interface ICategoryDao {
 	public int addCategory(Category category);
 	public int deleteCategory(int id);
 	public List<Category> findCategory();
-	
+	/**
+	 * insert many to many
+	 * @param categoryPrivilege
+	 * @return
+	 */
+	public int addCategoryPrivilege(Category category);
 }
