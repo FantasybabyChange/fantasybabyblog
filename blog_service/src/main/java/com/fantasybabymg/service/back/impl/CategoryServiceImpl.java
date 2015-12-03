@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	public boolean batchAddCategoryPrivilge(List<CategoryPrivilege> categoryPrivileges)
 			throws FantasyBabyException {
 		//TODO need to add logic to judge the category
-		
+		categoryDao.addCategoryPrivilege(categoryPrivileges);
 		return false;
 	}
 }

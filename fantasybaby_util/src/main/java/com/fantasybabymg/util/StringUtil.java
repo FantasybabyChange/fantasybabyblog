@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.fantasybabymg.enumerate.CharTypeEnum;
 import com.fantasybabymg.exception.FantasyBabyException;
 
 
@@ -16,6 +17,20 @@ public class StringUtil {
 			}
 		}
 		return str;
+	}
+	public static String upperOrLowerFirstChar(int type,String value){
+		if (isNotBleank(value)) {
+			if(type == CharTypeEnum.LOWERCASE.getValue()){
+				return value.substring(0,1).toLowerCase()+ value.substring(1, value.length());
+			}else{
+				return value.substring(0,1).toUpperCase() + value.substring(1, value.length());
+			}
+		}
+		return value;
+	}
+	public static boolean isNotBleank(String value){
+		
+		return StringUtils.isNotBlank(value);
 	}
 	
 	/** 
