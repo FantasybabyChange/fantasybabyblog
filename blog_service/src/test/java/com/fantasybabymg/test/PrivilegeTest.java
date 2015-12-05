@@ -1,4 +1,4 @@
-/*package com.fantasybabymg.test;
+package com.fantasybabymg.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class PrivilegeTest {
 		privilege2.setPName("更新");
 		privilege2.setPCode("update");
 		privilege2.setPPath("/update.do");
-		privilege2.setParentPrivilege(privilege2);
+		privilege2.setParentPrivilege(privilege1);
 		List<Privilege> list = new ArrayList<Privilege>();
 		list.add(privilege);
 		list.add(privilege1);
@@ -76,4 +76,3 @@ public class PrivilegeTest {
 		
 	}
 }
-*/

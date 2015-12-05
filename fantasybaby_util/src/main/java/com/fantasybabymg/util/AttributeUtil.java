@@ -16,6 +16,12 @@ import com.fantasybabymg.util.constant.SpecialMethodNameConstant;
  *
  */
 public class AttributeUtil {
+	/**
+	 *  copy value to another object but create uuid
+	 * @param list
+	 * @return
+	 * @throws Exception
+	 */
 	public static List<?> setUUidBatch(List<?> list) throws Exception{
 		List<Object> newList = null;
 		if (list != null && list.size() > 0) {
@@ -28,7 +34,6 @@ public class AttributeUtil {
 					String name = field.getName();
 					try {
 						Method getMethod = objectClass.getDeclaredMethod(SpecialMethodNameConstant.GET_METHOD_NAME+StringUtil.upperOrLowerFirstChar(CharTypeEnum.UPPERCASE.getValue(), name));
-						System.out.println(SpecialMethodNameConstant.GET_METHOD_NAME+StringUtil.upperOrLowerFirstChar(CharTypeEnum.UPPERCASE.getValue(), name));
 						Object returnValue = getMethod.invoke(object);
 						Method setMethod = objectClass.getDeclaredMethod(SpecialMethodNameConstant.SET_METHOD_NAME+StringUtil.upperOrLowerFirstChar(CharTypeEnum.UPPERCASE.getValue(), name),field.getType());
 						if (SpecialFieldNameConstant.UUID_FIELD_NAME.equals(name)) {

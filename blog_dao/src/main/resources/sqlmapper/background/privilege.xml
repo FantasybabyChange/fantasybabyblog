@@ -30,9 +30,13 @@
 		</if>#{pCode},#{pPath});
   	</insert>
   	<!-- insert many -->
-  	<insert id="addPrivilegesBatch" parameterType="java.util.List">
+  	<insert id="addPrivilegesBatch" useGeneratedKeys="true"  parameterType="java.util.List">
+  		 <selectKey resultType="long" keyProperty="pid" order="AFTER">  
+	        SELECT  
+	        LAST_INSERT_ID()  
+	    </selectKey> 
   		INSERT INTO _privilege(_uuid,pName,pCode,pPath,parentid) VALUES 
-		<foreach collection="list" item="item" index="index" separator="," >  
+		<foreach collection="list"   item="item" index="index" separator="," >  
         (#{item._uuid},#{item.pName},#{item.pCode},#{item.pPath},#{item.parentPrivilege.pId})  
     </foreach>
   	</insert>
