@@ -56,7 +56,8 @@ CREATE TABLE _category
    _uuid                CHAR(36),
    _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    categoryname          VARCHAR(30),
-   parentid         SMALLINT,
+   categorycode          VARCHAR(30) UNIQUE,
+   parentcode         VARCHAR(30),
    create_date          DATETIME,
    PRIMARY KEY (_id)
 )ENGINE = INNODB;
@@ -69,9 +70,9 @@ CREATE TABLE _privilege
    _uuid                CHAR(36) NOT NULL,
    pid                  SMALLINT NOT NULL AUTO_INCREMENT,
    pname                VARCHAR(30),
-   pcode                VARCHAR(50),
+   pcode                VARCHAR(30) UNIQUE,
    ppath                VARCHAR(300),
-   parentid             SMALLINT,
+   parentcode             VARCHAR(30) ,
    PRIMARY KEY (pid)
 )ENGINE = INNODB;
 

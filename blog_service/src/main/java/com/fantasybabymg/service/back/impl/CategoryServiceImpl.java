@@ -35,6 +35,7 @@ public class CategoryServiceImpl implements ICategoryService {
 				throw new FantasyBabyException("category is null",CategoryServiceImpl.class);
 			}
 		} catch (Exception e) {
+			throw new FantasyBabyException(e, CategoryServiceImpl.class);
 		}
 		return isPass;
 	}

@@ -6,9 +6,10 @@
   	<resultMap type="category" id="categoryMap">
   	    <result column="_id" property="_id" />
   	    <result column="categoryname" property="categoryName" />
+  	    <result column="categorycode" property="categoryCode" />
   	    <result column="create_date" property="createDate" /> 
   	    <association property="parentCategory" column="" javaType="category">
-		   <id property="_id" column="parentid"/>
+		   <id property="categorycode" column="parentcode"/>
 		</association>
 		<collection property="privileges" ofType="privilege">
 			<id  property="pId" column="pid"/>
@@ -20,16 +21,17 @@
   	 <sql id="categoryColumn">
 	  _id,
 	  categoryname,
+	  categorycode,
 	  create_date,
-	  parentid
+	  parentcode
 	 </sql>
   	<insert id="addCategory" parameterType="category">
-  		INSERT INTO _category(_uuid,categoryname,
+  		INSERT INTO _category(_uuid,categoryname,categorycode,
   		<if test="parentCategory != null and parentCategory != '' ">
-				parentid,
-		</if>create_date) VALUES(#{_uuid},#{categoryName},
+				parentcode,
+		</if>create_date) VALUES(#{_uuid},#{categoryName},#{categoryCode},
   		<if test="parentCategory != null and parentCategory != '' ">
-				#{parentCategory._id},
+				#{parentCategory.categoryCode},
 			</if>now());
   	</insert>
   	<insert id="addCategoryPrivilege" parameterType="java.util.List">

@@ -1,0 +1,5 @@
+1.complete the relationship of privilge and category.
+2.complete the article insert and search.
+3.add category and categoryParent parallel
+
+4. new design _catgory  _privilge   _tag 

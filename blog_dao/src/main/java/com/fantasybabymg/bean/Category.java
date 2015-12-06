@@ -20,6 +20,7 @@ public class Category implements java.io.Serializable {
 	private String _uuid;
 	private int _id;
 	private String categoryName;   
+	private String categoryCode;
 	private Category parentCategory;
 	private Date createDate;
 	private List<Privilege> privileges;
@@ -60,5 +61,18 @@ public class Category implements java.io.Serializable {
 	}
 	public void set_id(int _id) {
 		this._id = _id;
+	}
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+	@Override
+	public String toString() {
+		return "Category [_uuid=" + _uuid + ", _id=" + _id + ", categoryName="
+				+ categoryName + ", categoryCode=" + categoryCode
+				+ ", parentCategory=" + parentCategory + ", createDate="
+				+ createDate + ", privileges=" + privileges + "]";
 	}
 }

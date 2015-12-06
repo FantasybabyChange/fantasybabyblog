@@ -9,7 +9,7 @@
   	    <result column="pCode" property="pCode" />
   	    <result column="pPath" property="pPath" /> 
   	    <association property="parentPrivilege" column="" javaType="privilege">
-		   <id property="pId" column="parentid"/>
+		   <id property="pCode" column="parentcode"/>
 		</association>
   	</resultMap>
   	 <sql id="privilegeColumn">
@@ -17,17 +17,17 @@
 	  pName,
 	  pCode,
 	  pPath,
-	  parentid
+	  parentcode
 	 </sql>
 	 <!-- insert only one -->
   	<insert id="addPrivilege" parameterType="privilege">
   		INSERT INTO _privilege(_uuid,pName,pCode,pPath
   		<if test="parentPrivilege != null and parentPrivilege != '' ">
-				,parentid
-			</if>) VALUES(#{_uuid},#{pName},
+				,parentcode
+			</if>) VALUES(#{_uuid},#{pName},#{pCode},#{pPath}
   		<if test="parentPrivilege != null and parentPrivilege != '' ">
-				#{parentPrivilege.pId},
-		</if>#{pCode},#{pPath});
+				,#{parentPrivilege.pCode}
+		</if>);
   	</insert>
   	<!-- insert many -->
   	<insert id="addPrivilegesBatch" useGeneratedKeys="true"  parameterType="java.util.List">

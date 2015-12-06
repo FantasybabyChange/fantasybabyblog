@@ -17,10 +17,12 @@ public class PrivilegeTest {
 	}
 	@Test
 	public void testAddPrivilege(){
+		Privilege privilege2 = PrivilegeService.findPrivilege().get(0);
 		Privilege privilege = new Privilege();
 		privilege.setPName("插入");
-		privilege.setPCode("insert");
+		privilege.setPCode("insert2");
 		privilege.setPPath("/inser.do");
+		privilege.setParentPrivilege(privilege2);
 		try {
 		PrivilegeService.addPrivilege(privilege);
 		} catch (Exception e) {

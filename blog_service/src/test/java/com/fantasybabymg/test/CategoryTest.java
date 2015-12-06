@@ -21,8 +21,11 @@ public class CategoryTest {
 	}
 	@Test
 	public void testAddCategory(){
+		Category category2 = categoryService.findCategory().get(0);
 		Category category = new Category();
-		category.setCategoryName("管理员");
+		category.setCategoryCode("gly1");
+		category.setCategoryName("管理员1");
+		category.setParentCategory(category2);
 //		String str = "aad68f4a-e519-4f17s-8889-bb2f57257b99";
 //		System.out.println(str.length());
 		try {
@@ -37,7 +40,7 @@ public class CategoryTest {
 		try {
 			List<Category> findCategory = categoryService.findCategory();
 			for (Category category : findCategory) {
-				System.out.println(category.getCategoryName());
+				System.out.println(category);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
