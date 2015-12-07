@@ -1,4 +1,4 @@
-package com.fantasybabymg.test;
+/*package com.fantasybabymg.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.fantasybabymg.bean.Category;
 import com.fantasybabymg.bean.Privilege;
 import com.fantasybabymg.service.back.IPrivilegeService;
+import com.fantasybabymg.util.PinYinUtil;
 public class PrivilegeTest {
 	private IPrivilegeService PrivilegeService;
 	@Before
@@ -17,10 +19,14 @@ public class PrivilegeTest {
 	}
 	@Test
 	public void testAddPrivilege(){
-		Privilege privilege2 = PrivilegeService.findPrivilege().get(0);
+		List<Privilege> categories = PrivilegeService.findPrivilege();
+		Privilege privilege2 = null;
+		if (categories != null && categories.size() > 0) {
+			privilege2 = categories.get(0);
+		}
 		Privilege privilege = new Privilege();
-		privilege.setPName("插入");
-		privilege.setPCode("insert2");
+		privilege.setPName("插入1");
+		privilege.setPCode(PinYinUtil.getFullPingYinWord(privilege.getPName(), null,null));
 		privilege.setPPath("/inser.do");
 		privilege.setParentPrivilege(privilege2);
 		try {
@@ -78,3 +84,4 @@ public class PrivilegeTest {
 		
 	}
 }
+*/

@@ -171,6 +171,12 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
+		<!-- pin yin -->
+		<dependency>
+			<groupId>com.github.stuxuhai</groupId>
+			<artifactId>jpinyin</artifactId>
+			<version>1.1</version>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 	 <build>  

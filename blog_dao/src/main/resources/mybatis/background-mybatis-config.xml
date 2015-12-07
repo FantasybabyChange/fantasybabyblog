@@ -8,6 +8,7 @@
   		<typeAlias type="com.fantasybabymg.bean.BlogUserDetail" alias="userDetail"/>
   		<typeAlias type="com.fantasybabymg.bean.Category" alias="category"/>
   		<typeAlias type="com.fantasybabymg.bean.Privilege" alias="privilege"/>
+  		<typeAlias type="com.fantasybabymg.bean.CategoryPrivilege" alias="categoryPrivilge"/>
   		
   		<typeAlias type="com.fantasybabymg.bean.Article" alias="article"/>
   		<typeAlias type="com.fantasybabymg.bean.Tag" alias="tag"/>

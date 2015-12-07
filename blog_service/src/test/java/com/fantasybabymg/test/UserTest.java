@@ -1,4 +1,4 @@
-package com.fantasybabymg.test;
+/*package com.fantasybabymg.test;
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,3 +90,4 @@ public class UserTest {
 		}
 	}
 }
+*/

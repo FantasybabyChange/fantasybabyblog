@@ -12,19 +12,29 @@ import com.fantasybabymg.bean.Category;
 import com.fantasybabymg.bean.CategoryPrivilege;
 import com.fantasybabymg.bean.Privilege;
 import com.fantasybabymg.service.back.ICategoryService;
+import com.fantasybabymg.service.back.IPrivilegeService;
 import com.fantasybabymg.util.AttributeUtil;
+import com.fantasybabymg.util.PinYinUtil;
+import com.github.stuxuhai.jpinyin.PinyinFormat;
 public class CategoryTest {
 	private ICategoryService categoryService;
+	private IPrivilegeService PrivilegeService;
 	@Before
 	public void before(){
 		categoryService = (ICategoryService) new ClassPathXmlApplicationContext("classpath:spring-back-application.xml").getBean("categoryService");
+		PrivilegeService = (IPrivilegeService) new ClassPathXmlApplicationContext("classpath:spring-back-application.xml").getBean("privilegeService");
 	}
 	@Test
 	public void testAddCategory(){
-		Category category2 = categoryService.findCategory().get(0);
+		List<Category> categories = categoryService.findCategory();
+		Category category2 = null;
+		if (categories != null && categories.size() > 0) {
+			category2 = categories.get(1);
+		}
+		
 		Category category = new Category();
-		category.setCategoryCode("gly1");
-		category.setCategoryName("管理员1");
+		category.setCategoryName("管理员2");
+		category.setCategoryCode(PinYinUtil.getFullPingYinWord(category.getCategoryName(), "", PinyinFormat.WITHOUT_TONE));
 		category.setParentCategory(category2);
 //		String str = "aad68f4a-e519-4f17s-8889-bb2f57257b99";
 //		System.out.println(str.length());
@@ -47,9 +57,9 @@ public class CategoryTest {
 		}
 		
 	}
-	@Test
+	/*@Test
 	public void testAddUUID(){
-		List<Category> list = new ArrayList<Category>();
+		List<CategoryPrivilege> list = new ArrayList<CategoryPrivilege>();
 //		CategoryPrivilege a = new CategoryPrivilege();
 		Category  a = new Category();
 		a.setCategoryName("呵呵");
@@ -62,11 +72,11 @@ public class CategoryTest {
 		p.setPName("权限");
 		l2.add(p);
 		a.setPrivileges(l2);
-		/*CategoryPrivilege a1 = new CategoryPrivilege();
+		CategoryPrivilege a1 = new CategoryPrivilege();
 		a1.setCategoryId(1234);
 		a1.setPrivilegeId(3215);
 		list.add(a);
-		list.add(a1);*/
+		list.add(a1);
 		list.add(a);
 		try {
 			List<?> returnValues  = AttributeUtil.setUUidBatch(list);
@@ -82,5 +92,33 @@ public class CategoryTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}*/
+	@Test
+	public void testPinYin(){
+		String p1 = PinYinUtil.getPingYinHeaderWord("刘曦");
+		System.out.println(p1);
+		String p2 = PinYinUtil.getPingYinHeaderWord("行");
+		System.out.println(p2);
+		String p3 = PinYinUtil.getFullPingYinWord("你好", "", PinyinFormat.WITHOUT_TONE);
+		System.out.println(p3);
+	}
+	@Test
+	public void testAddCategoryPrivilge(){
+		List<CategoryPrivilege> list = new ArrayList<CategoryPrivilege>();
+		List<Privilege> privilges = PrivilegeService.findPrivilege();
+		List<Category> categorys = categoryService.findCategory();
+		Privilege privilege = privilges.get(0);
+		Category category = categorys.get(0);
+		CategoryPrivilege cp = new CategoryPrivilege();
+		cp.setPrivilegeId(privilege.getpId());
+		cp.setCategoryId(category.get_id());
+		Privilege privilege1 = privilges.get(1);
+		Category category1 = categorys.get(1);
+		CategoryPrivilege cp1 = new CategoryPrivilege();
+		cp1.setPrivilegeId(privilege1.getpId());
+		cp1.setCategoryId(category1.get_id());
+		list.add(cp);
+		list.add(cp1);
+		boolean batchAddCategoryPrivilge = categoryService.batchAddCategoryPrivilge(list);
 	}
 }
