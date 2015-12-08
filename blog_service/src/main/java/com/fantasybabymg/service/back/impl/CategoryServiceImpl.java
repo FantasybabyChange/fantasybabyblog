@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fantasybabymg.bean.Category;
 import com.fantasybabymg.bean.CategoryPrivilege;
 import com.fantasybabymg.dao.ICategoryDao;
+import com.fantasybabymg.dao.ICategoryPrivilegeDao;
 import com.fantasybabymg.exception.FantasyBabyException;
 import com.fantasybabymg.service.back.ICategoryService;
 import com.fantasybabymg.util.AttributeUtil;
@@ -22,6 +23,8 @@ import com.fantasybabymg.util.GUIDUtil;
 public class CategoryServiceImpl implements ICategoryService {
 	@Autowired
 	private ICategoryDao categoryDao;
+	@Autowired
+	private ICategoryPrivilegeDao categoryPrivilegeDao;
 	private Logger _logger = Logger.getLogger(CategoryServiceImpl.class); 
 	@Override
 	public boolean addCategory(Category category)throws FantasyBabyException{
@@ -52,7 +55,7 @@ public class CategoryServiceImpl implements ICategoryService {
 		_logger.info("start insert categoryPrivilge num:"+categoryPrivileges.size());
 		try {
 			List<CategoryPrivilege> setUUidBatch = (List<CategoryPrivilege>) AttributeUtil.setUUidBatch(categoryPrivileges);
-			int resultCount = categoryDao.addCategoryPrivilege(setUUidBatch);
+			int resultCount = categoryPrivilegeDao.addCategoryPrivilege(setUUidBatch);
 		_logger.info("end insert categoryPrivilge num:"+resultCount);
 			flag = true;
 		} catch (Exception e) {

@@ -13,8 +13,8 @@ public class CategoryPrivilege implements Serializable{
 	 */
 	private static final long serialVersionUID = 9203940062156561759L;
 	private String _uuid;
-    private int categoryId;
-    private int privilegeId;
+    private Category category;
+    private Privilege privilege;
 	public String get_uuid() {
 		return _uuid;
 	}
@@ -23,19 +23,19 @@ public class CategoryPrivilege implements Serializable{
 		this._uuid = _uuid;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public int getPrivilegeId() {
-		return privilegeId;
+	public Privilege getPrivilege() {
+		return privilege;
 	}
 
-	public void setPrivilegeId(int privilegeId) {
-		this.privilegeId = privilegeId;
+	public void setPrivilege(Privilege privilege) {
+		this.privilege = privilege;
 	}
 }

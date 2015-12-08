@@ -110,13 +110,13 @@ public class CategoryTest {
 		Privilege privilege = privilges.get(0);
 		Category category = categorys.get(0);
 		CategoryPrivilege cp = new CategoryPrivilege();
-		cp.setPrivilegeId(privilege.getpId());
-		cp.setCategoryId(category.get_id());
+		cp.setPrivilege(privilege);
+		cp.setCategory(category);
 		Privilege privilege1 = privilges.get(1);
-		Category category1 = categorys.get(1);
+		Category category1 = categorys.get(2);
 		CategoryPrivilege cp1 = new CategoryPrivilege();
-		cp1.setPrivilegeId(privilege1.getpId());
-		cp1.setCategoryId(category1.get_id());
+		cp1.setPrivilege(privilege1);
+		cp1.setCategory(category1);
 		list.add(cp);
 		list.add(cp1);
 		boolean batchAddCategoryPrivilge = categoryService.batchAddCategoryPrivilge(list);
