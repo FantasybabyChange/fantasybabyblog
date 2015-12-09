@@ -107,7 +107,7 @@ public class CategoryTest {
 		List<CategoryPrivilege> list = new ArrayList<CategoryPrivilege>();
 		List<Privilege> privilges = PrivilegeService.findPrivilege();
 		List<Category> categorys = categoryService.findCategory();
-		Privilege privilege = privilges.get(0);
+		/*Privilege privilege = privilges.get(0);
 		Category category = categorys.get(0);
 		CategoryPrivilege cp = new CategoryPrivilege();
 		cp.setPrivilege(privilege);
@@ -118,6 +118,12 @@ public class CategoryTest {
 		cp1.setPrivilege(privilege1);
 		cp1.setCategory(category1);
 		list.add(cp);
+		list.add(cp1);*/
+		Privilege privilege1 = privilges.get(0);
+		Category category1 = categorys.get(1);
+		CategoryPrivilege cp1 = new CategoryPrivilege();
+		cp1.setPrivilege(privilege1);
+		cp1.setCategory(category1);
 		list.add(cp1);
 		boolean batchAddCategoryPrivilge = categoryService.batchAddCategoryPrivilge(list);
 	}
