@@ -54,8 +54,8 @@ public class CategoryServiceImpl implements ICategoryService {
 		//TODO need to add logic to judge the category
 		_logger.info("start insert categoryPrivilge num:"+categoryPrivileges.size());
 		try {
-			List<CategoryPrivilege> setUUidBatch = (List<CategoryPrivilege>) AttributeUtil.setUUidBatch(categoryPrivileges);
-			int resultCount = categoryPrivilegeDao.addCategoryPrivilege(setUUidBatch);
+			List<CategoryPrivilege> categoryPrivilegeList = (List<CategoryPrivilege>) AttributeUtil.setUUidBatch(categoryPrivileges);
+			int resultCount = categoryPrivilegeDao.addCategoryPrivilege(categoryPrivilegeList);
 		_logger.info("end insert categoryPrivilge num:"+resultCount);
 			flag = true;
 		} catch (Exception e) {
