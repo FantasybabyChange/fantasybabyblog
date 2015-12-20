@@ -7,7 +7,9 @@
   	    <result column="pId" property="pId" />
   	    <result column="pName" property="pName" />
   	    <result column="pCode" property="pCode" />
-  	    <result column="pPath" property="pPath" /> 
+  	    <result column="pPath" property="pPath" />
+  	    <result column="is_show" property="isShow" />
+  	    <result column="order" property="order" /> 
   	    <association property="parentPrivilege" column="" javaType="privilege">
 		   <id property="pCode" column="parentcode"/>
 		</association>
@@ -17,16 +19,18 @@
 	  pName,
 	  pCode,
 	  pPath,
-	  parentcode
+	  parentcode,
+	  order,
+	  isShow
 	 </sql>
 	 <!-- insert only one -->
   	<insert id="addPrivilege" parameterType="privilege">
   		INSERT INTO _privilege(_uuid,pName,pCode,pPath
   		<if test="parentPrivilege != null and parentPrivilege != '' ">
 				,parentcode
-			</if>) VALUES(#{_uuid},#{pName},#{pCode},#{pPath}
+			</if>,order,is_show) VALUES(#{_uuid},#{pName},#{pCode},#{pPath}
   		<if test="parentPrivilege != null and parentPrivilege != '' ">
-				,#{parentPrivilege.pCode}
+				,#{parentPrivilege.pCode},#{order},#{isShow}
 		</if>);
   	</insert>
   	<!-- insert many -->

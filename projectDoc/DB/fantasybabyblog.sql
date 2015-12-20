@@ -73,6 +73,8 @@ CREATE TABLE _privilege
    pcode                VARCHAR(30) UNIQUE,
    ppath                VARCHAR(300),
    parentcode             VARCHAR(30) ,
+   is_show                TINYINT,
+   ORDER                  SMALLINT
    PRIMARY KEY (pid)
 )ENGINE = INNODB;
 

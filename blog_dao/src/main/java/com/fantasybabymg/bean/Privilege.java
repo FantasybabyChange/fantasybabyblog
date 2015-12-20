@@ -12,6 +12,8 @@ public class Privilege implements java.io.Serializable {
 	private static final long serialVersionUID = -7108857935325256818L;
 	private String _uuid;
 	private int pId;
+	private int order;
+	private int isShow;
 	private String pName;
 	private String pCode;
 	private String pPath;
@@ -53,5 +55,17 @@ public class Privilege implements java.io.Serializable {
 	}
 	public void setParentPrivilege(Privilege parentPrivilege) {
 		this.parentPrivilege = parentPrivilege;
+	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
+	}
+	public int getIsShow() {
+		return isShow;
+	}
+	public void setIsShow(int isShow) {
+		this.isShow = isShow;
 	}
 }
