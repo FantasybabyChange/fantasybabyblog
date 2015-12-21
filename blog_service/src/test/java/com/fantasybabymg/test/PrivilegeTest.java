@@ -1,5 +1,6 @@
-/*package com.fantasybabymg.test;
+package com.fantasybabymg.test;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.fantasybabymg.bean.Category;
 import com.fantasybabymg.bean.Privilege;
 import com.fantasybabymg.service.back.IPrivilegeService;
+import com.fantasybabymg.util.AttributeUtil;
 import com.fantasybabymg.util.PinYinUtil;
 public class PrivilegeTest {
 	private IPrivilegeService PrivilegeService;
@@ -81,7 +83,11 @@ public class PrivilegeTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	@Test
+	public void parseXMLToPrivilege(){
+		String filePath = PrivilegeTest.class.getClassLoader().getResource("initDataBase.xml").getPath();
+		AttributeUtil.convertXMLtoList(Privilege.class,filePath , "privileges");
 		
 	}
 }
-*/

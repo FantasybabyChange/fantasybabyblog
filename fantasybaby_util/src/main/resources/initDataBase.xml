@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fbdb>
     <users>
-    
     </users>
 	<privileges>
-		<privilege name="" code=""  path="" >
-			<privilege name="" code=""  path="" >
-			
-			
+		<privilege pName="首页" pCode="home"  pPath="/home" isShow="false">
+			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="true">
+			</privilege>
+			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="true">
 			</privilege>	
+		</privilege>
+		<privilege pName="权限管理" pCode="privilegeManager"  pPath="/privilege" isShow="false" >
+			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="true">
+			</privilege>
+			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="true">
+			</privilege>		
 		</privilege>
 	</privileges>
 	<categorys>
