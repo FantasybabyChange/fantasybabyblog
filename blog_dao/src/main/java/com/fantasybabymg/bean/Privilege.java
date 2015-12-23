@@ -68,4 +68,9 @@ public class Privilege implements java.io.Serializable {
 	public void setIsShow(int isShow) {
 		this.isShow = isShow;
 	}
+	@Override
+	public String toString() {
+		return "Privilege [_uuid=" + _uuid + ", pId=" + pId + ", order=" + order + ", isShow=" + isShow + ", pName="
+				+ pName + ", pCode=" + pCode + ", pPath=" + pPath + ", parentPrivilege=" + parentPrivilege + "]";
+	}
 }

@@ -3,23 +3,24 @@
     <users>
     </users>
 	<privileges>
-		<privilege pName="首页" pCode="home"  pPath="/home" isShow="false">
-			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="true">
+		<privilege pName="首页" pCode="home"  pPath="/home" isShow="1">
+			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="0">
 			</privilege>
-			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="true">
+			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="0">
 			</privilege>	
 		</privilege>
-		<privilege pName="权限管理" pCode="privilegeManager"  pPath="/privilege" isShow="false" >
-			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="true">
+		<privilege pName="权限管理" pCode="privilegeManager"  pPath="/privilege" isShow="1" >
+			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="0">
 			</privilege>
-			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="true">
+			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="0">
 			</privilege>		
 		</privilege>
 	</privileges>
-	<categorys>
-	
-	
-	</categorys>
+	<categories>
+		<category>
+		
+		</category>
+	</categories>
 	<tags>
 	
 	

@@ -28,11 +28,19 @@ public class StringUtil {
 		}
 		return value;
 	}
+	/**
+	 * 得到一个方法名   prefix+Suffix
+	 * @param type
+	 * @param value
+	 * @return
+	 */
+	public static String getMethodName(String prefix,String suffix){
+		return prefix +upperOrLowerFirstChar(CharTypeEnum.UPPERCASE.getValue(), suffix);
+	}
 	public static boolean isNotBleank(String value){
 		
 		return StringUtils.isNotBlank(value);
 	}
-	
 	/** 
 	 * 计算采用utf-8编码方式时字符串所占字节数  UTF8汉字占3个字节
 	 * @param content 

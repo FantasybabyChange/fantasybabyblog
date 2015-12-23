@@ -3,16 +3,17 @@ package com.fantasybabymg.util;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.dom4j.DocumentException;
+import org.apache.log4j.pattern.IntegerPatternConverter;
+import org.dom4j.Attribute;
 import org.dom4j.Element;
-import org.dom4j.Node;
 
-import com.fantasybabymg.enumerate.CharTypeEnum;
+import com.fantasybabymg.exception.FantasyBabyException;
 import com.fantasybabymg.util.constant.SpecialFieldNameConstant;
 import com.fantasybabymg.util.constant.SpecialMethodNameConstant;
 
@@ -41,9 +42,9 @@ public class AttributeUtil {
 				for (Field field : declaredFields) {
 					String name = field.getName();
 					try {
-						Method getMethod = objectClass.getDeclaredMethod(SpecialMethodNameConstant.GET_METHOD_NAME+StringUtil.upperOrLowerFirstChar(CharTypeEnum.UPPERCASE.getValue(), name));
+						Method getMethod = objectClass.getDeclaredMethod(StringUtil.getMethodName(SpecialMethodNameConstant.GET_METHOD_NAME, name), field.getType());
 						Object returnValue = getMethod.invoke(object);
-						Method setMethod = objectClass.getDeclaredMethod(SpecialMethodNameConstant.SET_METHOD_NAME+StringUtil.upperOrLowerFirstChar(CharTypeEnum.UPPERCASE.getValue(), name),field.getType());
+						Method setMethod = objectClass.getDeclaredMethod(StringUtil.getMethodName(SpecialMethodNameConstant.SET_METHOD_NAME, name),field.getType());
 						if (SpecialFieldNameConstant.UUID_FIELD_NAME.equals(name)) {
 							if (returnValue == null) {
 								setMethod.invoke(newObject, GUIDUtil.getUUid());
@@ -59,25 +60,45 @@ public class AttributeUtil {
 		}
 		return newList;
 	}
-	public static List<?> convertXMLtoList(Class<?> convertClass,File file,String parentElement){
+	public static Object convertStringType(String str,Type clas2){
+		if(Integer.class.getTypeName().toString().equals(clas2.toString()) || "int".equals(clas2.toString())){
+			return Integer.parseInt(str);
+		}
+		return str;
+	}
+	public static List<?> convertXMLtoList(Class<?> convertClass,File file,String parentElement) {
 		Dom4JReaderHelper dom4J = new Dom4JReaderHelper();
+		List<Object> list = new ArrayList<Object>();
 		try {
 			dom4J.initSAXReader(file);
 			Element rootElement = dom4J.getParentElement(parentElement);
 			if (rootElement != null) {
 				Iterator<?> elementIterator = rootElement.elementIterator();
 				while(elementIterator.hasNext()){
-					Node node = (Node) elementIterator.next();
-					System.out.println(node.getName());
+					Element element = (Element) elementIterator.next();
+					Field[] declaredFields = convertClass.getDeclaredFields();
+					if (CollectionUtil.isNotEmptyCollection(declaredFields)) {
+						Object newInstance = convertClass.newInstance();
+						for (Field field : declaredFields) {
+							Attribute attribute = element.attribute(field.getName());
+							if (attribute != null) {
+								String name = field.getName();
+								String value = attribute.getValue();
+								Method setMethod = convertClass.getDeclaredMethod(StringUtil.getMethodName(SpecialMethodNameConstant.SET_METHOD_NAME, name), field.getType());
+								setMethod.invoke(newInstance,convertStringType(value,field.getGenericType()));
+							}
+						}
+						list.add(newInstance);
+					}					
 				}
 			}
-		} catch (DocumentException e) {
+		} catch (Exception e) {
 			_log.error(e);
 		}
-		return null;
+		return list;
 	}
 	
-	public static List<?> convertXMLtoList(Class<?> convertClass,String filePath,String parentElement){
+	public static List<?> convertXMLtoList(Class<?> convertClass,String filePath,String parentElement) throws FantasyBabyException{
 		return convertXMLtoList(convertClass, new File(filePath),parentElement);
 	}
 

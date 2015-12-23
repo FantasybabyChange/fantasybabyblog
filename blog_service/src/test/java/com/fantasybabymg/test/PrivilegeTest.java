@@ -13,6 +13,8 @@ import com.fantasybabymg.bean.Privilege;
 import com.fantasybabymg.service.back.IPrivilegeService;
 import com.fantasybabymg.util.AttributeUtil;
 import com.fantasybabymg.util.PinYinUtil;
+import com.fantasybabymg.util.constant.ConfigurationFilePath;
+import com.fantasybabymg.util.constant.XMLNodeNameConstant;
 public class PrivilegeTest {
 	private IPrivilegeService PrivilegeService;
 	@Before
@@ -84,10 +86,15 @@ public class PrivilegeTest {
 			e.printStackTrace();
 		}
 	}
+	@SuppressWarnings("unchecked")
 	@Test
 	public void parseXMLToPrivilege(){
-		String filePath = PrivilegeTest.class.getClassLoader().getResource("initDataBase.xml").getPath();
-		AttributeUtil.convertXMLtoList(Privilege.class,filePath , "privileges");
+		String filePath = PrivilegeTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
+		List<Privilege> convertXMLtoList = (List<Privilege>) AttributeUtil.convertXMLtoList(Privilege.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME);
+		for (Privilege privilege : convertXMLtoList) {
+			System.out.println(privilege);
+		}
+		
 		
 	}
 }
