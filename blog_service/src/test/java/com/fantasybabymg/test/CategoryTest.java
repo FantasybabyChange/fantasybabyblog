@@ -15,6 +15,8 @@ import com.fantasybabymg.service.back.ICategoryService;
 import com.fantasybabymg.service.back.IPrivilegeService;
 import com.fantasybabymg.util.AttributeUtil;
 import com.fantasybabymg.util.PinYinUtil;
+import com.fantasybabymg.util.constant.ConfigurationFilePath;
+import com.fantasybabymg.util.constant.XMLNodeNameConstant;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 public class CategoryTest {
 	private ICategoryService categoryService;
@@ -126,5 +128,16 @@ public class CategoryTest {
 		cp1.setCategory(category1);
 		list.add(cp1);
 		boolean batchAddCategoryPrivilge = categoryService.batchAddCategoryPrivilge(list);
+	}
+	@Test
+	public void testCategoryXML(){
+		String filePath = CategoryTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
+		List<Category> convertXMLtoList = (List<Category>) AttributeUtil.convertXMLtoList(Category.class,filePath , XMLNodeNameConstant.CATEGORY_ROOT_ELEMENT_NAME,"parentCategory");
+		for (Category privilege : convertXMLtoList) {
+			System.out.println(privilege);
+		}
+		
+		
+	
 	}
 }

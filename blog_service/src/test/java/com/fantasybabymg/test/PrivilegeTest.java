@@ -90,7 +90,7 @@ public class PrivilegeTest {
 	@Test
 	public void parseXMLToPrivilege(){
 		String filePath = PrivilegeTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
-		List<Privilege> convertXMLtoList = (List<Privilege>) AttributeUtil.convertXMLtoList(Privilege.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME);
+		List<Privilege> convertXMLtoList = (List<Privilege>) AttributeUtil.convertXMLtoList(Privilege.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME,"parentPrivilege");
 		for (Privilege privilege : convertXMLtoList) {
 			System.out.println(privilege);
 		}

@@ -14,11 +14,22 @@
 			</privilege>
 			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="0">
 			</privilege>		
+			<privilege pName="删除" pCode="update"  pPath="/update.do" order="3" isShow="0">
+			</privilege>		
 		</privilege>
 	</privileges>
 	<categories>
-		<category>
-		
+		<category categoryName="标签分类" categoryCode="tagCategory">
+			<category categoryName="人文" categoryCode="renwen">
+			</category>
+			<category categoryName="地理" categoryCode="dili">
+			</category>
+		</category>
+		<category categoryName="角色分类" categoryCode="roleCategory">
+			<category categoryName="管理员" categoryCode="admin">
+			</category>
+			<category categoryName="后台管理员" categoryCode="backgroundManager">
+			</category>
 		</category>
 	</categories>
 	<tags>

@@ -66,7 +66,7 @@ public class AttributeUtil {
 		}
 		return str;
 	}
-	public static List<?> convertXMLtoList(Class<?> convertClass,File file,String parentElement) {
+	public static List<?> convertXMLtoList(Class<?> convertClass,File file,String parentElement,String unionObjectName) {
 		Dom4JReaderHelper dom4J = new Dom4JReaderHelper();
 		List<Object> list = new ArrayList<Object>();
 		try {
@@ -89,7 +89,27 @@ public class AttributeUtil {
 							}
 						}
 						list.add(newInstance);
-					}					
+						Iterator<?> childElementIterator = element.elementIterator();
+						while(childElementIterator.hasNext()){
+							Element childElement = (Element) childElementIterator.next();
+								Object childObject = convertClass.newInstance();
+								for (Field field : declaredFields) {
+									String name = field.getName();
+									Attribute attribute = childElement.attribute(field.getName());
+									if (attribute != null ||  name.equals(unionObjectName)) {
+										Method setMethod = convertClass.getDeclaredMethod(StringUtil.getMethodName(SpecialMethodNameConstant.SET_METHOD_NAME, name), field.getType());
+										if (name.equals(unionObjectName)) {
+											setMethod.invoke(childObject,newInstance);
+										}else{
+											String value = attribute.getValue();
+											setMethod.invoke(childObject,convertStringType(value,field.getGenericType()));
+										}
+									}
+								}
+								list.add(childObject);
+						}
+					}
+					
 				}
 			}
 		} catch (Exception e) {
@@ -98,8 +118,8 @@ public class AttributeUtil {
 		return list;
 	}
 	
-	public static List<?> convertXMLtoList(Class<?> convertClass,String filePath,String parentElement) throws FantasyBabyException{
-		return convertXMLtoList(convertClass, new File(filePath),parentElement);
+	public static List<?> convertXMLtoList(Class<?> convertClass,String filePath,String parentElement,String unionObjectName) throws FantasyBabyException{
+		return convertXMLtoList(convertClass, new File(filePath),parentElement, unionObjectName);
 	}
 
 }
