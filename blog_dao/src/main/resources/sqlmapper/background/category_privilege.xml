@@ -6,22 +6,22 @@
   	<resultMap type="category" id="categoryMap">
   	    <result column="_id" property="_id" />
   	    <association property="category" column="" javaType="category">
-			<result column="categoryid" property="_id" />   
+			<result column="categorycode" property="categoryCode" />   
 		</association>
 		<association property="privilege" column="" javaType="privilege">
-			<result column="privilegeid" property="_id" />
+			<result column="privilegecode" property="pCode" />
 		</association>
   	</resultMap>
   	 <sql id="categoryColumn">
 	  _id,
-	  categoryid,
-	  privilegeid
+	  privilegecode,
+	  categorycode
 	 </sql>
   	<insert id="addCategoryPrivilege"  parameterType="java.util.List" >
-  		INSERT INTO category_privilege(_uuid,privilegeid,categoryid) 
+  		INSERT INTO category_privilege(_uuid,categorycode,privilegecode) 
   		VALUES 
 		<foreach collection="list" item="item"   separator="," > 
-		     (#{item._uuid}, #{item.category._id},#{item.privilege.pId}) 
+		     (#{item._uuid}, #{item.category.categoryCode},#{item.privilege.pCode}) 
 	    </foreach>
 	    ;
   	</insert>

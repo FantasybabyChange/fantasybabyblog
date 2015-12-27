@@ -1,40 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fbdb>
     <users>
+    	<user userName="FantasyBaby" passWord="fantasybabymg" status="0">
+    	</user>
     </users>
 	<privileges>
 		<privilege pName="首页" pCode="home"  pPath="/home" isShow="1">
-			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="0">
+			<privilege pName="插入" pCode="insertHome"  pPath="/insert.do" order="1" isShow="0">
 			</privilege>
-			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="0">
+			<privilege pName="更新" pCode="updateHome"  pPath="/update.do" order="2" isShow="0">
 			</privilege>	
 		</privilege>
 		<privilege pName="权限管理" pCode="privilegeManager"  pPath="/privilege" isShow="1" >
-			<privilege pName="插入" pCode="insert"  pPath="/insert.do" order="1" isShow="0">
+			<privilege pName="插入" pCode="insertPrivilege"  pPath="/insert.do" order="1" isShow="0">
 			</privilege>
-			<privilege pName="更新" pCode="update"  pPath="/update.do" order="2" isShow="0">
+			<privilege pName="更新" pCode="updatePrivilege"  pPath="/update.do" order="2" isShow="0">
 			</privilege>		
-			<privilege pName="删除" pCode="update"  pPath="/update.do" order="3" isShow="0">
+			<privilege pName="删除" pCode="deletePrivilege"  pPath="/update.do" order="3" isShow="0">
 			</privilege>		
 		</privilege>
 	</privileges>
 	<categories>
-		<category categoryName="标签分类" categoryCode="tagCategory">
-			<category categoryName="人文" categoryCode="renwen">
-			</category>
-			<category categoryName="地理" categoryCode="dili">
-			</category>
-		</category>
 		<category categoryName="角色分类" categoryCode="roleCategory">
 			<category categoryName="管理员" categoryCode="admin">
-			</category>
-			<category categoryName="后台管理员" categoryCode="backgroundManager">
 			</category>
 		</category>
 	</categories>
 	<tags>
-	
-	
 	</tags>
 
 </fbdb>

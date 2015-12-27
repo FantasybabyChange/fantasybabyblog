@@ -17,4 +17,6 @@ public interface ICategoryService {
 	public List<Category> findCategory()throws FantasyBabyException;
 	//TODO
 	public boolean batchAddCategoryPrivilge(List<CategoryPrivilege> categoryPrivileges)throws FantasyBabyException;
+	
+	public boolean batchInitCategoryPrivilge()throws FantasyBabyException;
 }

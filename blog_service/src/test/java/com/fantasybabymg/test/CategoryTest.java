@@ -11,8 +11,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.fantasybabymg.bean.Category;
 import com.fantasybabymg.bean.CategoryPrivilege;
 import com.fantasybabymg.bean.Privilege;
+import com.fantasybabymg.context.SystemContext;
 import com.fantasybabymg.service.back.ICategoryService;
 import com.fantasybabymg.service.back.IPrivilegeService;
+import com.fantasybabymg.ubean.CategoryPrivilegeT;
 import com.fantasybabymg.util.AttributeUtil;
 import com.fantasybabymg.util.PinYinUtil;
 import com.fantasybabymg.util.constant.ConfigurationFilePath;
@@ -129,15 +131,16 @@ public class CategoryTest {
 		list.add(cp1);
 		boolean batchAddCategoryPrivilge = categoryService.batchAddCategoryPrivilge(list);
 	}
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testCategoryXML(){
 		String filePath = CategoryTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
 		List<Category> convertXMLtoList = (List<Category>) AttributeUtil.convertXMLtoList(Category.class,filePath , XMLNodeNameConstant.CATEGORY_ROOT_ELEMENT_NAME,"parentCategory");
-		for (Category privilege : convertXMLtoList) {
-			System.out.println(privilege);
-		}
-		
-		
-	
+		List<Privilege> privileges = (List<Privilege>) AttributeUtil.convertXMLtoList(Privilege.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME,"parentPrivilege");
+		CategoryPrivilegeT c = new CategoryPrivilegeT();
+		c.setCategorys(convertXMLtoList);
+		c.setPrivileges(privileges);
+		SystemContext.setCategoryPrivilege(c);
+		categoryService.batchInitCategoryPrivilge();
 	}
 }

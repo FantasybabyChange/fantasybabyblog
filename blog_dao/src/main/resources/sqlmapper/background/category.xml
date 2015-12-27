@@ -35,14 +35,13 @@
 				#{parentCategory.categoryCode},
 			</if>now());
   	</insert>
-  	<insert id="addCategoryPrivilege"  parameterType="java.util.List"  parameterMap="categoryPrivilges">
-  		INSERT INTO category_privilege(_uuid,privilegeid,categoryid) 
-  		VALUES 
-		<foreach collection="list" item="item"  open="(" separator="," close=")"> 
-		     (#{item._id}, #{item.privilegeId},#{item.categoryId}) 
-	    </foreach>
-	    ;
-  		
+  	<insert id="addBatchCategory" parameterType="java.util.List">
+  		INSERT INTO _category(_uuid,categoryname,categorycode,
+				parentcode,create_date) VALUES
+		<foreach collection="list"   item="item" index="index" separator="," >  
+        (#{item._uuid},#{item.categoryName},#{item.categoryCode},
+				#{item.parentCategory.categoryCode},now())  
+    	</foreach>;
   	</insert>
   	<!-- <update id="update" parameterType="account">
      	update t_account

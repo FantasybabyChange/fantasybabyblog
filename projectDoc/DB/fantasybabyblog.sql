@@ -74,7 +74,7 @@ CREATE TABLE _privilege
    ppath                VARCHAR(300),
    parentcode             VARCHAR(30) ,
    is_show                TINYINT,
-   ORDER                  SMALLINT
+   `order`                  SMALLINT,
    PRIMARY KEY (pid)
 )ENGINE = INNODB;
 
@@ -124,8 +124,8 @@ ALTER TABLE blog_user COMMENT 'user in blog.they have their own category.like ad
 CREATE TABLE category_privilege
 (
    _uuid               CHAR(36) NOT NULL,
-   privilegeid          SMALLINT,
-   categoryid           SMALLINT,
+   privilegecode          VARCHAR(30),
+   categorycode           VARCHAR(30),
    PRIMARY KEY (_uuid)
 )ENGINE = INNODB;
 

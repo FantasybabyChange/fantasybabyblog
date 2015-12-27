@@ -1,5 +1,6 @@
 package com.fantasybabymg.context;
 
+import com.fantasybabymg.ubean.CategoryPrivilegeT;
 import com.fantasybabymg.ubean.Criterion;
 
 public class SystemContext {
@@ -18,6 +19,8 @@ public class SystemContext {
 	private static ThreadLocal<String> pageOrder = new ThreadLocal<String>();
 	
 	private static ThreadLocal<Criterion<Object>> criterionMap = new ThreadLocal<Criterion<Object>>();
+	
+	private static ThreadLocal<CategoryPrivilegeT> categoryPrivilege = new ThreadLocal<CategoryPrivilegeT>();
 	public static void setPageSize(int _pageSize){
 		pageSize.set(_pageSize);
 	}
@@ -57,6 +60,16 @@ public class SystemContext {
 	}
 	public static void removeCriterionMap(){
 		criterionMap.remove(); 
+	}
+	//
+	public static void setCategoryPrivilege(CategoryPrivilegeT _categoryPrivilege){
+		categoryPrivilege.set(_categoryPrivilege);
+	}
+	public static CategoryPrivilegeT getCategoryPrivilege(){
+		return categoryPrivilege.get();
+	}
+	public static void removeCategoryPrivilege(){
+		categoryPrivilege.remove(); 
 	}
 	
 }

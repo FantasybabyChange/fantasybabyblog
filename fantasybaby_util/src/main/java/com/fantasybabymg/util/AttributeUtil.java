@@ -42,7 +42,7 @@ public class AttributeUtil {
 				for (Field field : declaredFields) {
 					String name = field.getName();
 					try {
-						Method getMethod = objectClass.getDeclaredMethod(StringUtil.getMethodName(SpecialMethodNameConstant.GET_METHOD_NAME, name), field.getType());
+						Method getMethod = objectClass.getDeclaredMethod(StringUtil.getMethodName(SpecialMethodNameConstant.GET_METHOD_NAME, name));
 						Object returnValue = getMethod.invoke(object);
 						Method setMethod = objectClass.getDeclaredMethod(StringUtil.getMethodName(SpecialMethodNameConstant.SET_METHOD_NAME, name),field.getType());
 						if (SpecialFieldNameConstant.UUID_FIELD_NAME.equals(name)) {
@@ -53,6 +53,7 @@ public class AttributeUtil {
 							setMethod.invoke(newObject, returnValue);
 						}
 					} catch (Exception e) {
+						System.out.println(e.getMessage());
 					}
 				}
 				newList.add(newObject);
