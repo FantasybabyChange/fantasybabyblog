@@ -20,25 +20,23 @@
 	  pCode,
 	  pPath,
 	  parentcode,
-	  order,
-	  isShow
+	  `order`,
+	  is_show
 	 </sql>
 	 <!-- insert only one -->
   	<insert id="addPrivilege" parameterType="privilege">
-  		INSERT INTO _privilege(_uuid,pName,pCode,pPath
-  		<if test="parentPrivilege != null and parentPrivilege != '' ">
-				,parentcode
-			</if>,order,is_show) VALUES(#{_uuid},#{pName},#{pCode},#{pPath}
-  		<if test="parentPrivilege != null and parentPrivilege != '' ">
-				,#{parentPrivilege.pCode},#{order},#{isShow}
-		</if>);
+  		INSERT INTO _privilege(_uuid,pName,pCode,pPath,parentcode,`order`,is_show) 
+  		VALUES
+  		(
+  			#{_uuid},#{pName},#{pCode},#{pPath}	,#{parentPrivilege.pCode},#{order},#{isShow}
+		);
   	</insert>
   	<!-- insert many -->
   	<insert id="addPrivilegesBatch" useGeneratedKeys="true"  parameterType="java.util.List">
-  		INSERT INTO _privilege(_uuid,pName,pCode,pPath,parentcode) VALUES 
+  		INSERT INTO _privilege(_uuid,pName,pCode,pPath,parentcode,`order`,is_show) VALUES 
 		<foreach collection="list"   item="item" index="index" separator="," >  
-        (#{item._uuid},#{item.pName},#{item.pCode},#{item.pPath},#{item.parentPrivilege.pCode})  
-    </foreach>
+        (#{item._uuid},#{item.pName},#{item.pCode},#{item.pPath},#{item.parentPrivilege.pCode},#{item.order},#{item.isShow})  
+    	</foreach>
   	</insert>
   	<select id="findPrivilege"  resultMap="privilegeMap">
   		SELECT <include refid="privilegeColumn"></include> FROM _privilege  

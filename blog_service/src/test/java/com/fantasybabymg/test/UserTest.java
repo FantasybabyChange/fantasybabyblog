@@ -95,6 +95,7 @@ public class UserTest {
 			e.printStackTrace();
 		}
 	}
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testinitUserDetail(){
 //		BlogUser user = new BlogUser();
@@ -102,13 +103,15 @@ public class UserTest {
 		String filePath = CategoryTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
 		List<Category> convertXMLtoList = (List<Category>) AttributeUtil.convertXMLtoList(Category.class,filePath , XMLNodeNameConstant.CATEGORY_ROOT_ELEMENT_NAME,"parentCategory");
 		List<Privilege> privileges = (List<Privilege>) AttributeUtil.convertXMLtoList(Privilege.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME,"parentPrivilege");
-		List<BlogUser> blogUsers = (List<BlogUser>) AttributeUtil.convertXMLtoList(BlogUser.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME,"users");
+		List<BlogUser> blogUsers = (List<BlogUser>) AttributeUtil.convertXMLtoList(BlogUser.class,filePath , XMLNodeNameConstant.USER_ROOT_ELEMENT_NAME,"users");
 		CategoryPrivilegeT cp = new CategoryPrivilegeT();
 		if (CollectionUtil.isNotEmptyCollection(blogUsers)) {
 			cp.setBlogUser(blogUsers.get(0));
 		}
 		cp.setCategorys(convertXMLtoList);
 		cp.setPrivileges(privileges);
+		SystemContext.setCategoryPrivilege(cp);
+		userService.batchInitUserCategoryPrivilege();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -24,6 +24,7 @@
   	    <association property="category" column="ca" javaType="category">
   	    	<result column="_id" property="_id" />
 	  	    <result column="categoryname" property="categoryName" />
+	  	    <result column="categorycode" property="categoryCode" />
 	  	    <result column="create_date" property="createDate" />
   	    </association>
   	</resultMap>
@@ -34,8 +35,8 @@
 	  create_date
 	 </sql>
   	<insert id="addUser" parameterType="user" useGeneratedKeys="true" keyProperty="_id">
-  		INSERT INTO blog_user(_uuid,username,password,status,categoryid,create_date) VALUES(#{_uuid},#{userName},#{passWord},#{status},
-  		#{category._id},now());
+  		INSERT INTO blog_user(_uuid,username,password,status,categorycode,create_date) VALUES(#{_uuid},#{userName},#{passWord},#{status},
+  		#{category.categoryCode},now());
   	</insert>
   	<select id="findUserAllInformation" parameterType="map" resultMap="userMap">
   		SELECT bu.`_id`,bu.`username`,bu.`PASSWORD`,bu.`STATUS`,bu.`create_date`,bu.`modify_date`,

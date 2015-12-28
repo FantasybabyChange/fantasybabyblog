@@ -5,13 +5,13 @@
     	</user>
     </users>
 	<privileges>
-		<privilege pName="首页" pCode="home"  pPath="/home" isShow="1">
+		<privilege pName="首页" pCode="home"  pPath="/home" order="0" isShow="1">
 			<privilege pName="插入" pCode="insertHome"  pPath="/insert.do" order="1" isShow="0">
 			</privilege>
 			<privilege pName="更新" pCode="updateHome"  pPath="/update.do" order="2" isShow="0">
 			</privilege>	
 		</privilege>
-		<privilege pName="权限管理" pCode="privilegeManager"  pPath="/privilege" isShow="1" >
+		<privilege pName="权限管理" pCode="privilegeManager"  pPath="/privilege" order="1" isShow="1" >
 			<privilege pName="插入" pCode="insertPrivilege"  pPath="/insert.do" order="1" isShow="0">
 			</privilege>
 			<privilege pName="更新" pCode="updatePrivilege"  pPath="/update.do" order="2" isShow="0">

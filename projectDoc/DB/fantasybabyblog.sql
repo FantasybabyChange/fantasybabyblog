@@ -109,7 +109,7 @@ CREATE TABLE blog_user
    _id                  SMALLINT NOT NULL AUTO_INCREMENT,
    username             VARCHAR(20),
    PASSWORD             VARCHAR(300),
-   categoryid           SMALLINT,
+   categorycode         VARCHAR(30),
    STATUS               TINYINT,
    create_date          DATETIME,
    modify_date          DATETIME,

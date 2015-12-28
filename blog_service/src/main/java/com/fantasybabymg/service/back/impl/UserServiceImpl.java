@@ -27,6 +27,8 @@ import com.fantasybabymg.util.AttributeUtil;
 import com.fantasybabymg.util.CollectionUtil;
 import com.fantasybabymg.util.EncryptUtil;
 import com.fantasybabymg.util.GUIDUtil;
+import com.fantasybabymg.util.StringUtil;
+import com.fantasybabymg.util.constant.SpecialAttributeConstant;
 @Service("userService")
 public class UserServiceImpl implements IUserService {
 	@Autowired
@@ -92,6 +94,10 @@ public class UserServiceImpl implements IUserService {
 		List<Category> categorys = categoryPrivilege.getCategorys();
 		List<Privilege> privileges = categoryPrivilege.getPrivileges();
 		BlogUser blogUser = categoryPrivilege.getBlogUser();
+		blogUser.set_uuid(GUIDUtil.getUUid());
+		if(StringUtil.isNotBleank(blogUser.getPassWord())){
+			blogUser.setPassWord(EncryptUtil.encryptToMD5(blogUser.getPassWord()));	
+		}
 		try {
 			categorys = (List<Category>) AttributeUtil.setUUidBatch(categorys);
 			privileges = (List<Privilege>) AttributeUtil.setUUidBatch(privileges);
@@ -99,19 +105,23 @@ public class UserServiceImpl implements IUserService {
 				List<CategoryPrivilege> categoryPrivileges = new ArrayList<CategoryPrivilege>();
 				for (Category category : categorys) {
 					if(category.getParentCategory() != null){
-						for (Privilege privilege : privileges) {
-							CategoryPrivilege cp = new CategoryPrivilege();
-							cp.setPrivilege(privilege);
-							cp.setCategory(category);
-							cp.set_uuid(GUIDUtil.getUUid());
-							categoryPrivileges.add(cp);
+						if(SpecialAttributeConstant.ADMIN_USER_CATEGORY.equalsIgnoreCase(category.getCategoryCode())){
+							blogUser.setCategory(category);
+							for (Privilege privilege : privileges) {
+								CategoryPrivilege cp = new CategoryPrivilege();
+								cp.setPrivilege(privilege);
+								cp.setCategory(category);
+								cp.set_uuid(GUIDUtil.getUUid());
+								categoryPrivileges.add(cp);
+							}
+							categoryPrivilegeDao.addCategoryPrivilege(categoryPrivileges);
 						}
 					}
 				}
-				categoryPrivilegeDao.addCategoryPrivilege(categoryPrivileges);
 			}
 			categoryDao.addBatchCategory(categorys);
 			privilegeDao.addPrivilegesBatch(privileges);
+			userDao.addUser(blogUser);
 			flag = true;
 		} catch (Exception e) {
 			throw new FantasyBabyException(e, CategoryServiceImpl.class);
