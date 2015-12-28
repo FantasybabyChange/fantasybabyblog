@@ -1,4 +1,4 @@
-/*package com.fantasybabymg.test;
+package com.fantasybabymg.test;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,10 +11,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.fantasybabymg.bean.BlogUser;
 import com.fantasybabymg.bean.BlogUserDetail;
 import com.fantasybabymg.bean.Category;
+import com.fantasybabymg.bean.Privilege;
 import com.fantasybabymg.context.SystemContext;
 import com.fantasybabymg.service.back.IUserDetailService;
 import com.fantasybabymg.service.back.IUserService;
+import com.fantasybabymg.ubean.CategoryPrivilegeT;
 import com.fantasybabymg.ubean.Criterion;
+import com.fantasybabymg.util.AttributeUtil;
+import com.fantasybabymg.util.CollectionUtil;
+import com.fantasybabymg.util.constant.ConfigurationFilePath;
+import com.fantasybabymg.util.constant.XMLNodeNameConstant;
 public class UserTest {
 	private IUserService userService;
 	private IUserDetailService userDetailService;
@@ -89,5 +95,22 @@ public class UserTest {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	public void testinitUserDetail(){
+//		BlogUser user = new BlogUser();
+		try {
+		String filePath = CategoryTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
+		List<Category> convertXMLtoList = (List<Category>) AttributeUtil.convertXMLtoList(Category.class,filePath , XMLNodeNameConstant.CATEGORY_ROOT_ELEMENT_NAME,"parentCategory");
+		List<Privilege> privileges = (List<Privilege>) AttributeUtil.convertXMLtoList(Privilege.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME,"parentPrivilege");
+		List<BlogUser> blogUsers = (List<BlogUser>) AttributeUtil.convertXMLtoList(BlogUser.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME,"users");
+		CategoryPrivilegeT cp = new CategoryPrivilegeT();
+		if (CollectionUtil.isNotEmptyCollection(blogUsers)) {
+			cp.setBlogUser(blogUsers.get(0));
+		}
+		cp.setCategorys(convertXMLtoList);
+		cp.setPrivileges(privileges);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
-*/
