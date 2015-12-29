@@ -24,6 +24,7 @@
 		<module>../blog_dao</module>
 		<module>../blog_service</module>
 		<module>../fantasybaby_util</module>
+		<module>../blog_back_web</module>
 		<!-- <module>../user-dao-hibernate</module>
 		<module>../user-service</module>
 		<module>../commom-interface</module>
