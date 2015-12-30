@@ -1,4 +1,4 @@
-package com.fantasybabymg.test;
+/*package com.fantasybabymg.test;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -98,3 +98,4 @@ public class PrivilegeTest {
 		
 	}
 }
+*/

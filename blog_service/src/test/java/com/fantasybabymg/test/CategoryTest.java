@@ -1,4 +1,4 @@
-package com.fantasybabymg.test;
+/*package com.fantasybabymg.test;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,7 +61,7 @@ public class CategoryTest {
 		}
 		
 	}
-	/*@Test
+	@Test
 	public void testAddUUID(){
 		List<CategoryPrivilege> list = new ArrayList<CategoryPrivilege>();
 //		CategoryPrivilege a = new CategoryPrivilege();
@@ -96,7 +96,7 @@ public class CategoryTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 	@Test
 	public void testPinYin(){
 		String p1 = PinYinUtil.getPingYinHeaderWord("刘曦");
@@ -111,7 +111,7 @@ public class CategoryTest {
 		List<CategoryPrivilege> list = new ArrayList<CategoryPrivilege>();
 		List<Privilege> privilges = PrivilegeService.findPrivilege();
 		List<Category> categorys = categoryService.findCategory();
-		/*Privilege privilege = privilges.get(0);
+		Privilege privilege = privilges.get(0);
 		Category category = categorys.get(0);
 		CategoryPrivilege cp = new CategoryPrivilege();
 		cp.setPrivilege(privilege);
@@ -122,7 +122,7 @@ public class CategoryTest {
 		cp1.setPrivilege(privilege1);
 		cp1.setCategory(category1);
 		list.add(cp);
-		list.add(cp1);*/
+		list.add(cp1);
 		Privilege privilege1 = privilges.get(0);
 		Category category1 = categorys.get(1);
 		CategoryPrivilege cp1 = new CategoryPrivilege();
@@ -144,3 +144,4 @@ public class CategoryTest {
 		categoryService.batchInitCategoryPrivilge();
 	}
 }
+*/

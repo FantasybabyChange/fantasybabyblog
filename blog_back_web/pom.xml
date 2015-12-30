@@ -10,12 +10,42 @@
 	</parent>
   <artifactId>blog_back_web</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
   <name>blog background web</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+	 <dependency>  
+           <groupId>${project.groupId}</groupId>  
+           <artifactId>blog_service</artifactId>
+           <version>${project.version}</version>  
+     </dependency> 
+  	<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+	</dependency>
+	<dependency>
+		  <groupId>javax.servlet</groupId>
+		  <artifactId>jsp-api</artifactId>
+		  <scope>provided</scope>
+	</dependency>
+	 <dependency>  
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-webmvc</artifactId>  
+     </dependency>
   </dependencies>
   <build>
     <finalName>blog_back_web</finalName>
+    <plugins>
+	   <plugin>   
+	      <groupId>org.apache.maven.plugins</groupId>   
+	      <artifactId>maven-war-plugin</artifactId>   
+	      <version>2.0.2</version>   
+	      <configuration>   
+	         <warSourceExcludes>WEB-INF/lib/log4j-${log4j.version}.jar</warSourceExcludes>
+	         <outputDirectory>E:\servers\tomcat\apache-tomcat-8.0.18\webapps</outputDirectory>
+	      </configuration>   
+	   </plugin>
+    </plugins>
   </build>
+  
 </project>
