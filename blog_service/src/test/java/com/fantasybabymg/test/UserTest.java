@@ -90,7 +90,7 @@ public class UserTest {
 //		BlogUser user = new BlogUser();
 		try {
 		BlogUserDetail userDetail = userDetailService.findUserDetail(1);
-		System.out.println(userDetail.getAddress());
+		System.out.println(userDetail);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -100,7 +100,7 @@ public class UserTest {
 	public void testinitUserDetail(){
 //		BlogUser user = new BlogUser();
 		try {
-		String filePath = CategoryTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
+		String filePath = UserTest.class.getClassLoader().getResource(ConfigurationFilePath.INITDB_XML_FILE_PATH).getPath();
 		List<Category> convertXMLtoList = (List<Category>) AttributeUtil.convertXMLtoList(Category.class,filePath , XMLNodeNameConstant.CATEGORY_ROOT_ELEMENT_NAME,"parentCategory");
 		List<Privilege> privileges = (List<Privilege>) AttributeUtil.convertXMLtoList(Privilege.class,filePath , XMLNodeNameConstant.PRIVILEGE_ROOT_ELEMENT_NAME,"parentPrivilege");
 		List<BlogUser> blogUsers = (List<BlogUser>) AttributeUtil.convertXMLtoList(BlogUser.class,filePath , XMLNodeNameConstant.USER_ROOT_ELEMENT_NAME,"users");

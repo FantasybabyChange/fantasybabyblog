@@ -1,18 +1,17 @@
 package com.fantasybabymg.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fantasybabymg.action.common.BaseAction;
+
 @Controller
 @RequestMapping("/hello")
 @Scope("prototype")
-public class HelloAction {
+public class HelloAction extends BaseAction{
 	@RequestMapping("/helloworld")
-	public String helloWord(HttpServletRequest req, HttpServletResponse resp){
+	public String helloWord(){
 		req.setAttribute("hello", "刘曦");
 		return "hello";
 	}
