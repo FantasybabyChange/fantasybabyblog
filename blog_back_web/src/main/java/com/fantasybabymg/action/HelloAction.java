@@ -13,7 +13,7 @@ public class HelloAction extends BaseAction{
 	@RequestMapping("/helloworld")
 	public String helloWord(){
 		req.setAttribute("hello", "刘曦");
-		return "hello";
+		return "login";
 	}
 
 }
