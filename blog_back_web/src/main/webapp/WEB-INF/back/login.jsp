@@ -7,14 +7,14 @@
 <title>Admin Login</title>
 	<meta content="" name="description"/>
 	<meta content="" name="author"/>
-	<%@include file="common/common_style.jsp" %>
+	<%@include file="common/head.jsp" %>
 	<!-- BEGIN THEME STYLES -->
-	<link href="assets/css/style-conquer.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/themes/blue.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="assets/css/pages/login.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=commonCssPath %>style-conquer.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=commonCssPath %>style.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=commonCssPath %>style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=commonCssPath %>plugins.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=commonCssPath %>themes/blue.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="<%=commonCssPath %>pages/login.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 </head>
 <body>
@@ -22,7 +22,7 @@
 <body class="login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-	<img src="assets/img/logo.png" alt=""/>
+	<img src="<%=commonImagePath%>logo.png" alt="fantasybaby"/>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -75,15 +75,15 @@
 <script src="assets/plugins/respond.min.js"></script>
 <script src="assets/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="<%=request.getContextPath() %>/js/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="<%=commonJSPath %>jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="<%=commonJSPath %>bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<%=commonJSPath %>plugins/jquery.blockui.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+<script src="<%=commonJSPath %>plugins/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="assets/scripts/login.js" type="text/javascript"></script>
+<script src="<%=commonJSPath %>back/login.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
