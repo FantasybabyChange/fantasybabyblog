@@ -2,12 +2,16 @@ var Login = function () {
 
 	var handleLogin = function() {
 		$('.login-form').validate({
+			    debug:true,
 	            errorElement: 'span', //default input error message container
 	            errorClass: 'help-block', // default input error message class
-	            focusInvalid: false, // do not focus the last invalid input
+	            focusInvalid: true, // do not focus the last invalid input
 	            rules: {
 	                username: {
-	                    required: true
+	                    required: true,
+	                    /*minlength:4,
+	                    maxlength:16,*/
+	                    rangelength:[4,16]
 	                },
 	                password: {
 	                    required: true
@@ -19,10 +23,13 @@ var Login = function () {
 
 	            messages: {
 	                username: {
-	                    required: "Username is required1."
+	                    required: "请填写用户名",
+                    	/*minlength:"请输入四位以上的用户名",
+	                    maxlength:"用户名过长"*/
+	                    rangelength:"请输入4-16位长度的用户名"
 	                },
 	                password: {
-	                    required: "Password is required2."
+	                    required: "请填写密码"
 	                }
 	            },
 
@@ -244,11 +251,9 @@ var Login = function () {
     return {
         //main function to initiate the module
         init: function () {
-        	
             handleLogin();
-            handleForgetPassword();
-            handleRegister();        
-	       
+            /*handleForgetPassword();*/
+            /*handleRegister();*/
         }
 
     };

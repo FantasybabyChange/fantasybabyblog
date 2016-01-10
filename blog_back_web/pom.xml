@@ -35,7 +35,7 @@
   </dependencies>
   <build>
     <finalName>blog_back_web</finalName>
-    <plugins>
+    <!-- <plugins>
 	   <plugin>   
 	      <groupId>org.apache.maven.plugins</groupId>   
 	      <artifactId>maven-war-plugin</artifactId>   
@@ -45,7 +45,7 @@
 	         <outputDirectory>E:\servers\tomcat\apache-tomcat-8.0.18\webapps</outputDirectory>
 	      </configuration>   
 	   </plugin>
-    </plugins>
+    </plugins> -->
   </build>
   
 </project>
