@@ -49,7 +49,7 @@
 	</servlet>
     <servlet-mapping>
         <servlet-name>blogServlet</servlet-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
     </servlet-mapping>
     <servlet>
       <servlet-name>DruidStatView</servlet-name>
