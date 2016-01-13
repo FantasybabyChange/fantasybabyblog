@@ -56,6 +56,7 @@
 			<div class="input-icon">
 				<i class="fa fa-lock"></i>
 				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="验证码" name="password"/>
+				<input type="hidden" name="sessionid" value="<%=session.getId() %>>"/>
 			</div>
 		</div>
 		<div class="form-actions">

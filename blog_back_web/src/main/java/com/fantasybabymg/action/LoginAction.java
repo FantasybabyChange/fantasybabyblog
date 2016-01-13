@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fantasybabymg.action.common.BaseAction;
-import com.fantasybabymg.bean.BlogUser;
+import com.fantasybabymg.service.back.vo.UserLoginVO;
 @Controller
 @Scope("prototype")
 public class LoginAction extends BaseAction{
@@ -22,7 +22,8 @@ public class LoginAction extends BaseAction{
 		return null;
 	}
 	@RequestMapping(name="/login/validateAjax",method=RequestMethod.POST)
-	public String validateLogin(@ModelAttribute(value) BlogUser bloguser){
-		return null;
+	public String validateLogin(@ModelAttribute UserLoginVO userLogin){
+		System.out.println(userLogin.getRemember());
+		return "index";
 	}
 }

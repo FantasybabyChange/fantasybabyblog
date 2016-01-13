@@ -14,7 +14,8 @@ var Login = function () {
 	                    rangelength:[4,16]
 	                },
 	                password: {
-	                    required: true
+	                    required: true,
+	                    minlength:6
 	                },
 	                remember: {
 	                    required: false
@@ -29,7 +30,8 @@ var Login = function () {
 	                    rangelength:"请输入4-16位长度的用户名"
 	                },
 	                password: {
-	                    required: "请填写密码"
+	                    required: "请填写密码",
+	                    minlength:"请输入大于六的密码"
 	                }
 	            },
 
