@@ -27,11 +27,11 @@ var Login = function () {
 	                    required: "请填写用户名",
                     	/*minlength:"请输入四位以上的用户名",
 	                    maxlength:"用户名过长"*/
-	                    rangelength:"请输入4-16位长度的用户名"
+	                    rangelength:"请输入{0}-{1}位长度的用户名"
 	                },
 	                password: {
 	                    required: "请填写密码",
-	                    minlength:"请输入大于六的密码"
+	                    minlength:"请输入长度大于{0}的密码"
 	                }
 	            },
 

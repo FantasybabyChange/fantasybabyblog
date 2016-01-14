@@ -28,7 +28,7 @@
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" action="/login/" method="post">
+	<form class="login-form" action="validateLogin?redirectURL=" method="post">
 		<h3 class="form-title">登陆到管理员</h3>
 		<div class="alert alert-error display-hide">
 			<button class="close" data-close="alert"></button>
@@ -55,8 +55,8 @@
 			<label class="control-label visible-ie8 visible-ie9">Password</label>
 			<div class="input-icon">
 				<i class="fa fa-lock"></i>
-				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="验证码" name="password"/>
-				<input type="hidden" name="sessionid" value="<%=session.getId() %>>"/>
+				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="验证码" name="verifycode"/>
+				<input type="hidden" name="sessionid" value="<%=session.getId() %>"/>
 			</div>
 		</div>
 		<div class="form-actions">

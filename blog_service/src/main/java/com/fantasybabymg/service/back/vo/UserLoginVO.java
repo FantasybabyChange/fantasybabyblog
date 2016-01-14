@@ -4,7 +4,6 @@ public class UserLoginVO {
  private String username;
  private String password;
  private int remember;
- private String sessionid;
 public String getUsername() {
 	return username;
 }
@@ -23,12 +22,4 @@ public int getRemember() {
 public void setRemember(int remember) {
 	this.remember = remember;
 }
-public String getSessionid() {
-	return sessionid;
-}
-public void setSessionid(String sessionid) {
-	this.sessionid = sessionid;
-}
- 
- 
 }
