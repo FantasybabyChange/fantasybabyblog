@@ -8,14 +8,14 @@ var Login = function () {
 	            focusInvalid: true, // do not focus the last invalid input
 	            rules: {
 	                username: {
-	                    required: true,
+	                    required: false,
 	                    /*minlength:4,
-	                    maxlength:16,*/
-	                    rangelength:[4,16]
+	                    maxlength:16,
+	                    rangelength:[4,16]*/
 	                },
 	                password: {
-	                    required: true,
-	                    minlength:6
+	                    /*required: false,
+	                    minlength:6*/
 	                },
 	                remember: {
 	                    required: false

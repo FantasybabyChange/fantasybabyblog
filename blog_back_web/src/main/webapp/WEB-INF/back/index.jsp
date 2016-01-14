@@ -7,7 +7,7 @@
 <title>index</title>
 </head>
 <body>
-
+ It's index page
 
 </body>
 </html>
