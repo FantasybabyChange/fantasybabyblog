@@ -68,5 +68,23 @@ public class CaptchaConst {
      * 坐标变换的距离
      */
     public static final int TRANSLATE_START = 16;
+    /**
+     * 简单
+     */
+    public static final int CAPTCHLEVEL_EASY = 10;
+    /**
+     * 中等
+     */
+    public static final int CAPTCHLEVEL_MIDDLE = 20;
+    /**
+     * 多
+     */
+    public static final int CAPTCHLEVEL_DIFF = 30;
+    
+    public static final int BACKGROUN_LINE_LENGTH = 12;
+    
+    public static final String INIT_PARAME_OPEN_BACKGROUD = "openBackGround";
+    
+    
         
 }

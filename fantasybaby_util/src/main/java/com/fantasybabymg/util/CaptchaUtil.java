@@ -1,6 +1,7 @@
 package com.fantasybabymg.util;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -8,30 +9,45 @@ import java.util.Random;
 import com.fantasybabymg.util.constant.CaptchaConst;
 
 public class CaptchaUtil {
-	
+	 private static Random random = new Random();
     /**
      * 绘制字符串
      */
-    public static String getRandomString(BufferedImage image){
-    	 Random random = new Random();
-    	//产生Image对象的Graphics对象,改对象可以在图像上进行各种绘制操作
+    public static String getRandomString(BufferedImage image,int positionHeight,boolean drawBackgroundLine,int backgrounLevel){
     	Graphics g = image.getGraphics();
-    	g.fillRect(0, 0, image.getWidth(),image.getHeight());
+    	int imagewidth = image.getWidth();
+    	int iamgeHeight = image.getHeight();
+    	g.fillRect(0, 0, imagewidth,iamgeHeight);
+    	if(drawBackgroundLine){
+    		g.setColor(CaptchaConst.PURPLE_COLOR);
+		 for (int i = 0; i < backgrounLevel; i++) {         
+	            int x = random.nextInt(imagewidth);         
+	            int y = random.nextInt(iamgeHeight);         
+	            int xl = random.nextInt(CaptchaConst.BACKGROUN_LINE_LENGTH);         
+	            int yl = random.nextInt(CaptchaConst.BACKGROUN_LINE_LENGTH);         
+	            g.drawLine(x, y, x + xl, y + yl);         
+	        }         
+    	}
         g.setFont(CaptchaConst.BASE_FONTS[random.nextInt(4)]);
         g.setColor(CaptchaConst.PURPLE_COLOR);
-    	//绘制随机字符
         StringBuffer randomString = new StringBuffer("");
         String rand = null;
         int stringPoint = CaptchaConst.TRANSLATE_START*random.nextInt(3);
+        int imageHeight = image.getHeight();
+        int heightPostion = imageHeight/2 + positionHeight;
         for(int i=1;i<=CaptchaConst.RANDOM_STRING_NUM;i++){
+        	g.setColor(getRandomColor());
             rand = String.valueOf(CaptchaConst.RAND_STRING.charAt(random.nextInt(CaptchaConst.RAND_STRING.length()-1)));
             randomString.append(rand);
             g.translate(0,0);
-            g.drawString(rand,stringPoint+CaptchaConst.FONT_SPACING*i , 16);
+            g.drawString(rand,stringPoint+CaptchaConst.FONT_SPACING*i , heightPostion);
         }
         g.dispose();
         g=null;
         return randomString.toString();
+    }
+    public static String getRandomString(BufferedImage image,int positionHeight){
+    		return getRandomString(image, positionHeight,false,0);
     }
     /**
      * 生成随机字符串
@@ -73,5 +89,11 @@ public class CaptchaUtil {
             randomString.append(rand);
         }
         return randomString.toString();
+    }
+    private static Color getRandomColor(){
+    	int red = random.nextInt(225);
+        int green = random.nextInt(225);
+        int blue = random.nextInt(225);
+    	return new Color(red, green, blue);
     }
 }

@@ -45,20 +45,31 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">Password</label>
-			<div class="input-icon">
-				<i class="fa fa-lock"></i>
-				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
+					<label class="control-label visible-ie8 visible-ie9">Password</label>
+					<div class="input-icon">
+						<i class="fa fa-lock"></i>
+						<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
+					</div>
+				</div>
+		<div class="row">
+			<div class="col-md-7">
+				<div class="form-group">
+					<label class="control-label visible-ie8 visible-ie9">Captcha</label>
+					<div class="input-icon">
+						<i class="fa fa-lock"></i>
+						<input class="form-control " type="text"  placeholder="验证码" name="verifycode"/>
+						<input type="hidden" name="sessionid" value="<%=session.getId() %>"/>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">Password</label>
-			<div class="input-icon">
-				<i class="fa fa-lock"></i>
-				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="验证码" name="verifycode"/>
-				<input type="hidden" name="sessionid" value="<%=session.getId() %>"/>
+			<div class="col-md-5">
+				<div class="form-group">
+					<img src="/adminCaptch?type=105_34_5"  alt="captch"/>
+				</div>
 			</div>
-		</div>
+		 </div>
+		
+		
 		<div class="form-actions">
 			<label class="checkbox">
 			<input type="checkbox" name="remember" value="1"/> Remember me </label>

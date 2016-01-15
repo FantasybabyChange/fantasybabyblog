@@ -17,6 +17,7 @@ import com.fantasybabymg.exception.FantasyBabyException;
 import com.fantasybabymg.util.CaptchaUtil;
 import com.fantasybabymg.util.ConvertUtil;
 import com.fantasybabymg.util.EncryptUtil;
+import com.fantasybabymg.util.StringUtil;
 import com.fantasybabymg.util.constant.CaptchaConst;
 import com.fantasybabymg.util.constant.CaptchaSessionConst;
 
@@ -33,23 +34,41 @@ public class CaptchaServlet extends HttpServlet {
 			throws ServletException, IOException {
 		super.doPost(req, resp);
 	}
+	
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
         	String type = request.getParameter("type");
         	BufferedImage image = null;
+        	int positionHeight = 0;
     		if(!StringUtils.isEmpty(type)){
     			String[] types = type.split("_");
     			image = new BufferedImage(ConvertUtil.stringToInteger(types[0]),ConvertUtil.stringToInteger(types[1]),BufferedImage.TYPE_INT_BGR);
+    			if(types.length >= 3){
+    				positionHeight = Integer.parseInt(types[2]);
+    			}
     		}else{
     			image = CaptchaConst.DEFAULT_IMAGE;
     		}
-            String randomString = CaptchaUtil.getRandomString(image);
+    		String initParameter = this.getInitParameter(CaptchaConst.INIT_PARAME_OPEN_BACKGROUD);
+    		String randomString = null;
+    		if(StringUtil.isNotBleank(initParameter)){
+    			if(Boolean.parseBoolean(initParameter)){
+    				randomString = CaptchaUtil.getRandomString(image,positionHeight,Boolean.parseBoolean(initParameter),CaptchaConst.CAPTCHLEVEL_DIFF);
+    			}else{
+    				randomString = CaptchaUtil.getRandomString(image,positionHeight);
+    			}
+    		}else{
+    			randomString = CaptchaUtil.getRandomString(image,positionHeight);
+    		}
             HttpSession session = request.getSession();
             session.removeAttribute(CaptchaSessionConst.ADMIN_CAPTCHA_KEY);
             session.setAttribute(CaptchaSessionConst.ADMIN_CAPTCHA_KEY, EncryptUtil.encryptToMD5(randomString.toLowerCase()));
-        	//将内存中的图片通过流动形式输出到客户端
+            response.setHeader("Pragma", "no-cache");         
+            response.setHeader("Cache-Control", "no-cache");         
+            response.setDateHeader("Expires", 0);         
+            response.setContentType("image/jpeg"); 
             ImageIO.write(image, CaptchaConst.JPEG, response.getOutputStream());
         } catch (Exception e) {
             e.printStackTrace();
