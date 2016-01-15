@@ -15,6 +15,7 @@
 	<link href="<%=commonCssPath %>plugins.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=commonCssPath %>themes/blue.css" rel="stylesheet" type="text/css" id="style_color"/>
 	<link href="<%=commonCssPath %>pages/login.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=commonCssPath %>custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 </head>
 <body>
@@ -64,7 +65,7 @@
 			</div>
 			<div class="col-md-5">
 				<div class="form-group">
-					<img src="/adminCaptch?type=105_34_5"  alt="captch"/>
+					<img src="/adminCaptch?type=105_34_5" data-captch="captchLogin" class="captchfb" alt="captch"/>
 				</div>
 			</div>
 		 </div>
@@ -94,12 +95,14 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="<%=commonJSPath %>plugins/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<!-- BEGIN PAGE My SCRIPTS -->
 <script src="<%=commonJSPath %>back/login.js" type="text/javascript"></script>
+<script src="<%=commonJSPath %>common/captchfb.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
   Login.init();
+  CaptchFB.init();
 });
 </script>
 <!-- END JAVASCRIPTS -->
