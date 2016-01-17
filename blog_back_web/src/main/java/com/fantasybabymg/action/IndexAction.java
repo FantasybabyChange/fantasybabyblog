@@ -11,8 +11,9 @@ import com.fantasybabymg.action.common.BaseAction;
 import com.fantasybabymg.service.back.vo.UserLoginVO;
 @Controller
 @Scope("prototype")
+@RequestMapping("index")
 public class IndexAction extends BaseAction{
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@RequestMapping(value="/show",method=RequestMethod.GET)
 	public String showLogin(){
 		//TODO
 		return "index";

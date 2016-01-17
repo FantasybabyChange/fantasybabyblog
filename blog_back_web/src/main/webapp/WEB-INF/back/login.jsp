@@ -32,9 +32,8 @@
 	<form class="login-form" action="validateLogin?redirectURL=" method="post">
 		<h3 class="form-title">登陆到管理员</h3>
 		<div class="alert alert-error display-hide">
-			<button class="close" data-close="alert"></button>
-			<span>
-				 Enter any username and password.
+			<button class="close" type="button" data-close="alert"></button>
+			<span data-close="alert_value" class="has-error">
 			</span>
 		</div>
 		<div class="form-group">
@@ -65,7 +64,7 @@
 			</div>
 			<div class="col-md-5">
 				<div class="form-group">
-					<img src="/adminCaptch?type=105_34_5" data-captch="captchLogin" class="captchfb" alt="captch"/>
+					<img src="<%=contextPath %>/adminCaptch?type=105_34_5" data-captch="captchLogin" class="captchfb" alt="captch"/>
 				</div>
 			</div>
 		 </div>
@@ -73,7 +72,7 @@
 		
 		<div class="form-actions">
 			<label class="checkbox">
-			<input type="checkbox" name="remember" value="1"/> Remember me </label>
+			<input type="checkbox" name="remember"/> Remember me </label>
 			<button type="submit" class="btn btn-info pull-right">
 			Login </button>
 		</div>
@@ -100,7 +99,12 @@
 <script src="<%=commonJSPath %>common/captchfb.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-jQuery(document).ready(function() {     
+var errorValue = '${errors}';
+jQuery(document).ready(function() {
+	if(errorValue){
+		$('span[data-close=alert_value]', $('.login-form')).html(errorValue);
+		$('.alert-error', $('.login-form')).show();
+	}
   Login.init();
   CaptchFB.init();
 });

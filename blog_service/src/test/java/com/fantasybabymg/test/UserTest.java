@@ -3,10 +3,17 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 import com.fantasybabymg.bean.BlogUser;
 import com.fantasybabymg.bean.BlogUserDetail;
@@ -15,6 +22,7 @@ import com.fantasybabymg.bean.Privilege;
 import com.fantasybabymg.context.SystemContext;
 import com.fantasybabymg.service.back.IUserDetailService;
 import com.fantasybabymg.service.back.IUserService;
+import com.fantasybabymg.service.back.vo.UserLoginVO;
 import com.fantasybabymg.ubean.CategoryPrivilegeT;
 import com.fantasybabymg.ubean.Criterion;
 import com.fantasybabymg.util.AttributeUtil;
@@ -24,11 +32,13 @@ import com.fantasybabymg.util.constant.XMLNodeNameConstant;
 public class UserTest {
 	private IUserService userService;
 	private IUserDetailService userDetailService;
+	private ReloadableResourceBundleMessageSource messageSource;
 	@Before
 	public void before(){
 		ClassPathXmlApplicationContext cx = new ClassPathXmlApplicationContext("classpath:spring-back-application.xml");
 		userService = (IUserService) cx.getBean("userService");
 		userDetailService = (IUserDetailService) cx.getBean("userDetailService");
+//		messageSource = (ReloadableResourceBundleMessageSource) cx.getBean("messageSource");
 	}
 	@Test
 	public void testAddUser(){
@@ -115,6 +125,23 @@ public class UserTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	@Test
+	public void testPropertyFile(){
+		UserLoginVO user = new UserLoginVO();
+		user.setUsername("");
+		ValidatorFactory facotry = Validation.buildDefaultValidatorFactory();
+		//get validator
+		Validator validator = facotry.getValidator();
+		//validtor
+		Set<ConstraintViolation<UserLoginVO>> validate = validator.validate(user);
+		System.out.println(validate);  
+//		System.out.println(messageSource.getMessage("form.username.password.empty", null, null));
+//		String filePath = UserTest.class.getClassLoader().getResource(ConfigurationFilePath.USER_MESSAGE_FILE_PATH).getPath();
+//		PropertyUtil.initPeoperty(filePath);
+//		String propertyVale = PropertyUtil.getPropertyVale("FORM_USERNAME_PASSWORD_EMPTY");
+//		System.out.println(propertyVale);
+//		PropertyUtil.close();
 	}
 }
 */

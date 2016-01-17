@@ -1,6 +1,9 @@
 var Login = function () {
 
 	var handleLogin = function() {
+		$('button[data-close=alert]').click(function(){
+			$('.alert-error').hide();
+		});
 		$('.login-form').validate({
 			    debug:true,
 	            errorElement: 'span', //default input error message container
@@ -8,14 +11,14 @@ var Login = function () {
 	            focusInvalid: true, // do not focus the last invalid input
 	            rules: {
 	                username: {
-	                    required: false,
+	                    required: true,
 	                    /*minlength:4,
-	                    maxlength:16,
-	                    rangelength:[4,16]*/
+	                    maxlength:16,*/
+	                    rangelength:[4,10]
 	                },
 	                password: {
-	                    /*required: false,
-	                    minlength:6*/
+	                    required: true,
+	                    minlength:6
 	                },
 	                remember: {
 	                    required: false
@@ -35,7 +38,8 @@ var Login = function () {
 	                }
 	            },
 
-	            invalidHandler: function (event, validator) { //display error alert on form submit   
+	            invalidHandler: function (event, validator) { //display error alert on form submit
+	            	$('.alert-error').find('span[data-close=alert_value]').html("请输入账号和密码");
 	                $('.alert-error', $('.login-form')).show();
 	            },
 
@@ -253,7 +257,7 @@ var Login = function () {
     return {
         //main function to initiate the module
         init: function () {
-            handleLogin();
+//            handleLogin();
             /*handleForgetPassword();*/
             /*handleRegister();*/
         }

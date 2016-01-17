@@ -2,3 +2,6 @@
 .captchfb{
 	cursor:pointer;
 }
+span.has-error{
+	color:#b94a48;
+}
