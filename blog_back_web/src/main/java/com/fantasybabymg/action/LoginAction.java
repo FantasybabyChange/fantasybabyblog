@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fantasybabymg.action.common.BaseAction;
 import com.fantasybabymg.service.back.vo.UserLoginVO;
@@ -27,8 +28,11 @@ public class LoginAction extends BaseAction{
 		return "login";
 	}
 	@RequestMapping(value="/validateLoginAjax",method=RequestMethod.POST)
-	public String validateLoginAjax(@ModelAttribute("userLogin") @Valid UserLoginVO userlogin,BindingResult result){
-		
+	@ResponseBody
+	public BindingResult validateLoginAjax(@ModelAttribute("userLogin") @Valid UserLoginVO userlogin,BindingResult result){
+		if(result.hasErrors()){
+			return result;
+		}
 		return null;
 	}
 	@RequestMapping(value="/validateLogin",method=RequestMethod.POST)

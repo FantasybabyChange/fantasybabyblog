@@ -58,7 +58,15 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                form.submit();
+	            	$.ajax({
+	            		url: "validateLoginAjax",
+	            		type:"POST",
+	            		data:{"username":"abc123","password":"123"},
+	            		success: function(data){
+	            			console.log(data);
+	            		
+	                  }});
+	                //form.submit();
 	            }
 	        });
 
@@ -257,7 +265,7 @@ var Login = function () {
     return {
         //main function to initiate the module
         init: function () {
-//            handleLogin();
+            handleLogin();
             /*handleForgetPassword();*/
             /*handleRegister();*/
         }
