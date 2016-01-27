@@ -62,6 +62,7 @@ var Login = function () {
 	            		url: "validateLoginAjax",
 	            		type:"POST",
 	            		data:{"username":"abc123","password":"123"},
+	            		dataType:"json",
 	            		success: function(data){
 	            			console.log(data);
 	            		
