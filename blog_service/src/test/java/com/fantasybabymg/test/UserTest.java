@@ -143,5 +143,15 @@ public class UserTest {
 //		System.out.println(propertyVale);
 //		PropertyUtil.close();
 	}
+	@Test
+	public void testFindUserMap(){
+		UserLoginVO userLogin = new UserLoginVO();
+		userLogin.setUsername("FantasyBaby");
+		Criterion<Object> userCriterion = new Criterion<Object>();
+		userCriterion.setCriterion(userLogin);
+		SystemContext.setCriterionMap(userCriterion);
+		BlogUser findUser = userService.findUser();
+		System.out.println(findUser);
+	}
 }
 */

@@ -1,6 +1,7 @@
 package com.fantasybabymg.service.back.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,10 @@ import com.fantasybabymg.dao.ICategoryPrivilegeDao;
 import com.fantasybabymg.dao.IPrivilegeDao;
 import com.fantasybabymg.dao.IUserDao;
 import com.fantasybabymg.dao.IUserDetailDao;
+import com.fantasybabymg.enumerate.UserStatusEnum;
 import com.fantasybabymg.exception.FantasyBabyException;
 import com.fantasybabymg.service.back.IUserService;
+import com.fantasybabymg.service.back.vo.UserLoginVO;
 import com.fantasybabymg.ubean.CategoryPrivilegeT;
 import com.fantasybabymg.ubean.Criterion;
 import com.fantasybabymg.util.AttributeUtil;
@@ -115,20 +118,34 @@ public class UserServiceImpl implements IUserService {
 								categoryPrivileges.add(cp);
 							}
 							categoryPrivilegeDao.addCategoryPrivilege(categoryPrivileges);
+							privilegeDao.addPrivilegesBatch(privileges);
 						}
 					}
 				}
+				categoryDao.addBatchCategory(categorys);
 			}
-			categoryDao.addBatchCategory(categorys);
-			privilegeDao.addPrivilegesBatch(privileges);
 			userDao.addUser(blogUser);
 			flag = true;
 		} catch (Exception e) {
 			throw new FantasyBabyException(e, CategoryServiceImpl.class);
 		}finally{
-			categorys.clear();
-			privileges.clear();
+			if(categorys != null){
+				categorys.clear();
+			}
+			if(privileges != null){
+				privileges.clear();
+			}
 		}
 		return flag;
+	}
+	@Override
+	public BlogUser findUser() {
+		Criterion<Object> criterionMap = SystemContext.getCriterionMap();
+		UserLoginVO userLogin = (UserLoginVO) criterionMap.getCriterion();
+		String username = userLogin.getUsername();
+		Map<String, Object> searchMap = new HashMap<String,Object>();
+		searchMap.put("username", username);
+		searchMap.put("status", UserStatusEnum.ACTIVATE.getValue());
+		return userDao.findUser(searchMap); 
 	}
 }

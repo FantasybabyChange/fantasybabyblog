@@ -4,11 +4,11 @@ package com.fantasybabymg.enumerate;
  * @author FantasyBaby
  *
  */
-public enum UserStatusEnum {
-	ACTIVATE(0),
-	INACTIVATED(1);
+public enum ValidateStatusEnum {
+	PASS(0),
+	NOTPASS(1);
 	int value;
-	UserStatusEnum(int value){
+	ValidateStatusEnum(int value){
 		this.value = value;
 	}
 	public int getValue() {

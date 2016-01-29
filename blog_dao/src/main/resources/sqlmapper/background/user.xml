@@ -56,6 +56,20 @@
 		  				and bu.status=#{status}
 		  			</if>
   	</select>
+  	<select id="findUser" parameterType="map" resultType="user">
+  		SELECT bu.`_id`,bu.`username`,bu.`PASSWORD`
+  				FROM blog_user bu WHERE
+		  		    1=1
+		  			<if test="username != null and username != '' ">
+		  			and bu.username LIKE '%${username}%' 
+		  			</if>
+		  			<if test="userid != null">
+		  				and bu._id=#{userid}
+		  			</if>
+		  			<if test="status != null">
+		  				and bu.status=#{status}
+		  			</if>
+  	</select>
   	<delete id="deleteUser"  parameterType="int">
   		delete from blog_user where _id=#{id}
   	</delete>

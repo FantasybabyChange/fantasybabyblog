@@ -3,6 +3,7 @@ package com.fantasybabymg.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -17,7 +18,7 @@ import com.fantasybabymg.exception.FantasyBabyException;
  */
 public  class PropertyUtil {
 	private static Properties pro = null;
-	private static FileInputStream input = null;
+	private static InputStream input = null;
 	private static Logger _loger = Logger.getLogger(Properties.class);
 	public static void initPeoperty(String filePath){
 		try {
@@ -26,6 +27,17 @@ public  class PropertyUtil {
 				input = new FileInputStream(new File(filePath));
 				pro.load(input);
 				_loger.info("log property file  input path="+filePath);
+			}
+		} catch (Exception e) {
+			throw new FantasyBabyException(e, PropertyUtil.class);
+		}
+	}
+	public static void initPeoperty(InputStream _input){
+		try {
+			if(pro == null){
+				pro = new Properties();
+				input = _input;
+				pro.load(input);
 			}
 		} catch (Exception e) {
 			throw new FantasyBabyException(e, PropertyUtil.class);

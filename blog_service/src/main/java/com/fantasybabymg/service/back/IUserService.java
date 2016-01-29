@@ -15,4 +15,5 @@ public interface IUserService {
 	public List<BlogUser> findUsers()throws FantasyBabyException;
 	public boolean deleteUser(int id)throws FantasyBabyException;
 	public boolean batchInitUserCategoryPrivilege()throws FantasyBabyException;
+	public BlogUser findUser();
 }

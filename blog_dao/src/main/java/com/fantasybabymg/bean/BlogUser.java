@@ -79,5 +79,11 @@ public class BlogUser implements java.io.Serializable {
 	public void set_id(int _id) {
 		this._id = _id;
 	}
+	@Override
+	public String toString() {
+		return "BlogUser [_uuid=" + _uuid + ", _id=" + _id + ", userName=" + userName + ", passWord=" + passWord
+				+ ", status=" + status + ", userDetail=" + userDetail + ", category=" + category + ", createDate="
+				+ createDate + ", modifyDate=" + modifyDate + "]";
+	}
 	
 }
