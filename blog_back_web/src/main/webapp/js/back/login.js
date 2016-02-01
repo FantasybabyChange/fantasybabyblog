@@ -54,7 +54,7 @@ var Login = function () {
 	            errorPlacement: function (error, element) {
 	                error.insertAfter(element.closest('.input-icon'));
 	            },
-
+	            focusCleanup:true,
 	            submitHandler: function (form) {
 	            	$.ajax({
 	            		url: "validateLoginAjax",
