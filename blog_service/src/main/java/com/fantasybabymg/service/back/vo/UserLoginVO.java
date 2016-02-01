@@ -3,12 +3,13 @@ package com.fantasybabymg.service.back.vo;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 
 public class UserLoginVO {
  
  @NotBlank(message="{password_username_notempty}")
- @Size(max=10,message="{username_maxlength}")
+ @Range(min=4,max=10,message="{username_maxlength}")
  private String username;
  @NotBlank(message="{password_username_notempty}")
  @Size(min=6,message="{password_minlength}")

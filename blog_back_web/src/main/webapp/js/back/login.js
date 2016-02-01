@@ -12,8 +12,6 @@ var Login = function () {
 	            rules: {
 	                username: {
 	                    required: true,
-	                    /*minlength:4,
-	                    maxlength:16,*/
 	                    rangelength:[4,10]
 	                },
 	                password: {
