@@ -41,6 +41,10 @@ public class StringUtil {
 		
 		return StringUtils.isNotBlank(value);
 	}
+	public static boolean isNotEmpty(String value){
+		
+		return StringUtils.isNotEmpty(value);
+	}
 	/** 
 	 * 计算采用utf-8编码方式时字符串所占字节数  UTF8汉字占3个字节
 	 * @param content 

@@ -25,9 +25,15 @@ var CaptchFB = function () {
 		
 	}
      $(document).on("click","img[data-captch]",sendRequestCaptch);
+    var clickImpage = function(){
+    	$('img[data-captch]').click();
+    }
     return {
         init: function () {
         	sendRequestCaptch();
+        },
+        changeCaptchfb:function(){
+        	clickImpage();
         }
 
     };

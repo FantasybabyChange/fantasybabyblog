@@ -1,5 +1,5 @@
 var Login = function () {
-
+	
 	var handleLogin = function() {
 		$('button[data-close=alert]').click(function(){
 			$('.alert-error').hide();
@@ -12,7 +12,7 @@ var Login = function () {
 	            rules: {
 	                username: {
 	                    required: true,
-	                    rangelength:[4,10]
+	                    rangelength:[4,15]
 	                },
 	                password: {
 	                    required: true,
@@ -59,11 +59,23 @@ var Login = function () {
 	            	$.ajax({
 	            		url: "validateLoginAjax",
 	            		type:"POST",
-	            		data:{"username":"abc123","password":"123"},
+	            		data:$(form).serialize(),
 	            		dataType:"json",
 	            		success: function(data){
-	            			console.log(data);
-	            		
+	            			var errorPlace = $(form).find("span[data-close=alert_value]");
+	            			if(data){
+	            				if(data.PASS === 0){
+	            					errorPlace.attr("class","has-pass");
+	            					errorPlace.html("登录成功,请等待页面跳转");
+	            					$('.alert-error', $('.login-form')).show();
+	            					form.submit();
+	            				}else{
+	            					errorPlace.html(data.error);
+	            					$('.alert-error', $('.login-form')).show();	
+		            				CaptchFB.changeCaptchfb();
+	            				}
+	            				
+	            			}	            		
 	                  }});
 	                //form.submit();
 	            }

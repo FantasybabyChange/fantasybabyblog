@@ -8,5 +8,7 @@ public class ActionReturnConst {
 	 */
 	public static final String REDIRECT = "redirect:";
 	
+	public static final String REQUEST_BACK_MAPPING = "/admin";
+	
 	
 }

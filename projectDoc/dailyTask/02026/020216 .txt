@@ -1,0 +1,8 @@
+1.login logic.
+  (1)js validate
+  (2)ajax validate
+  (3)form submit 
+  -------------(finish)
+(2)user cookie and save user infomation in seesion.Then turn to index page.
+(3)merge index page html and css.
+2.complete the article insert and search.

@@ -99,7 +99,7 @@
 <script src="<%=commonJSPath %>common/captchfb.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-var errorValue = '${errors}';
+var errorValue = '${error}';
 jQuery(document).ready(function() {
 	if(errorValue){
 		$('span[data-close=alert_value]', $('.login-form')).html(errorValue);
