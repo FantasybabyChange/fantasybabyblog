@@ -395,38 +395,4 @@ public final class EncryptUtil {
 //		}
 //		return obj;
 //	}
-	
-
-	/**
-	 * 测试
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		long startTime = System.currentTimeMillis();
-		System.out.println(encryptToMD5("分分为范文芳违法威风威风威风威风威风威风威风威风we分为范文芳违法we分为范文芳违法我分为范文芳违法we分为范文芳违法我分为范文芳违法威风威风威风威风威风分为范文芳违法we"));
-		long endTime = System.currentTimeMillis()-startTime;
-		System.out.println(endTime);
-//		CryptUtil jiami = new CryptUtil();
-		// 执行MD5加密"Hello world!"
-//		System.out.println("Hello经过MD5:" + encryptToMD5("Hello"));
-		// 生成一个DES算法的密匙
-//		SecretKey key = jiami.createSecretKey("DES");
-		// 用密匙加密信息"Hello world!"
-//		String str1 = encryptToDES("Hellfweewfwefwefffo");
-//		System.out.println("使用des加密信息Hello为:" + str1);
-//		// 使用这个密匙解密
-//		String str2 = decryptByDES(str1);
-//		System.out.println("解密后为：" + str2);
-//		// 创建公匙和私匙
-//		jiami.createPairKey();
-//		// 对Hello world!使用私匙进行签名
-//		jiami.signToInfo("Hello", "mysign.bat");
-//		// 利用公匙对签名进行验证。
-//		if (jiami.validateSign("mysign.bat")) {
-//			System.out.println("Success!");
-//		} else {
-//			System.out.println("Fail!");
-//		}
-	}
 }
