@@ -3,6 +3,17 @@ package com.fantasybabymg.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.fantasybabymg.enumerate.EncodeTypeEnum;
+import com.fantasybabymg.enumerate.EncryptionType;
+
 public final class EncryptUtil {
 	/**
 	 * 进行MD5加密
@@ -51,6 +62,81 @@ public final class EncryptUtil {
 		return byte2hex(digesta);
 	}
 
+	
+	private static String IV = "AAAAAAAAAAAAAAAA";
+	  static String plaintext = "123"; /*Note null padding*/
+	  static String encryptionKey = "0123456789abcdef";
+	  public static void main(String [] args) {
+	    try {
+	      
+	      System.out.println("==Java==");
+	      System.out.println("plain:   " + plaintext);
+
+	      byte[] cipher = encrypt_AES_ECB(plaintext);
+	      System.out.println(byte2hex(cipher));
+	      System.out.println(ArrayUtils.toString(cipher));;
+
+	      System.out.print("cipher:  ");
+	      StringBuffer sb = new StringBuffer();
+	      
+	      for (int i=0; i<cipher.length; i++){
+	        System.out.print(new Integer(cipher[i])+" ");
+	        System.out.println(Byte.toString(cipher[i]));
+	      }
+	      System.out.println("");
+
+	      String decrypted = decrypt_AES(cipher, encryptionKey);
+
+	      System.out.println("decrypt: " + decrypted);
+
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } 
+	  }
+private static Cipher cipher;
+private final static String KEY_ALGORITHM = "AES";
+private static SecretKey secretKey;  
+/**
+ * use aes to encrypt a string
+ * @param plainText
+ * @param encryptionKey
+ * @return
+ * @throws Exception
+ */
+  public synchronized  static byte[] encrypt_AES_ECB(String plainText) throws Exception {
+	 return encrypt_AES_ECB(plainText,EncryptionType.ENCRYP.getValue());
+  }
+/**
+ * use aes to encrypt a string
+ * @param plainText
+ * @param encryptionKey
+ * @return
+ * @throws Exception
+ */
+  public synchronized  static byte[] encrypt_AES_ECB(String plainText,int type) throws Exception {
+	  cipher = Cipher.getInstance(KEY_ALGORITHM);  
+      secretKey = KeyGenerator.getInstance(KEY_ALGORITHM).generateKey();
+	  if(type == EncryptionType.ENCRYP.getValue()){
+		  cipher.init(Cipher.ENCRYPT_MODE, secretKey);//使用加密模式初始化 密钥
+	  }else{
+		  cipher.init(Cipher.DECRYPT_MODE, secretKey);
+		  
+	  }
+	  return cipher.doFinal(plainText.getBytes(EncodeTypeEnum.UTF8.getValue()));
+  }
+/**
+ * use aes to decrypt
+ * @param cipherText
+ * @param encryptionKey
+ * @return
+ * @throws Exception
+ */
+  public static String decrypt_AES(byte[] cipherText, String encryptionKey) throws Exception{
+    Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding", "SunJCE");
+    SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes(EncodeTypeEnum.UTF8.getValue()), "AES");
+    cipher.init(Cipher.DECRYPT_MODE, key,new IvParameterSpec(IV.getBytes(EncodeTypeEnum.UTF8.getValue())));
+    return new String(cipher.doFinal(cipherText),EncodeTypeEnum.UTF8.getValue());
+  }
 //	// //////////////////////////////////////////////////////////////////////////
 //	
 //	private static final SecretKey key = createSecretKey("DES");
