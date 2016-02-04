@@ -1,10 +1,16 @@
 package com.fantasybabymg.util;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -78,13 +84,14 @@ public final class EncryptUtil {
 
 	      System.out.print("cipher:  ");
 	      StringBuffer sb = new StringBuffer();
+	      String parseByte2HexStr = parseByte2HexStr(cipher);
+	      String byte2hex = byte2hex(cipher);
+	      System.out.println(parseByte2HexStr+"--------1");
+	      System.out.println(byte2hex+"--------2");
+	      System.out.println("-------------------------");
+	      System.out.println(ArrayUtils.toString(parseHexStr2Byte(parseByte2HexStr)));
+	      System.out.println(ArrayUtils.toString(hex2byte(byte2hex)));
 	      
-	      for (int i=0; i<cipher.length; i++){
-	        System.out.print(new Integer(cipher[i])+" ");
-	        System.out.println(Byte.toString(cipher[i]));
-	      }
-	      System.out.println("");
-
 	      String decrypted = decrypt_AES(cipher, encryptionKey);
 
 	      System.out.println("decrypt: " + decrypted);
@@ -124,6 +131,38 @@ private static SecretKey secretKey;
 	  }
 	  return cipher.doFinal(plainText.getBytes(EncodeTypeEnum.UTF8.getValue()));
   }
+  public static String encrypt(String bef_aes, String password) {  
+      byte[] byteContent = null;  
+      try {  
+          byteContent = bef_aes.getBytes("utf-8");  
+      } catch (UnsupportedEncodingException e) {  
+          e.printStackTrace();  
+      }  
+      return encrypt(byteContent,password);  
+  }  
+  public static String encrypt(byte[] content, String password) {  
+      try {  
+          SecretKey secretKey = getKey(password);  
+          byte[] enCodeFormat = secretKey.getEncoded();  
+          SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");  
+          Cipher cipher = Cipher.getInstance("AES");// 创建密码器  
+          cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化  
+          byte[] result = cipher.doFinal(content);  
+          String aft_aes = parseByte2HexStr(result);  
+          return aft_aes; // 加密  
+      } catch (NoSuchAlgorithmException e) {  
+          e.printStackTrace();  
+      } catch (NoSuchPaddingException e) {  
+          e.printStackTrace();  
+      } catch (InvalidKeyException e) {  
+          e.printStackTrace();  
+      } catch (IllegalBlockSizeException e) {  
+          e.printStackTrace();  
+      } catch (BadPaddingException e) {  
+          e.printStackTrace();  
+      }  
+      return null;  
+  }  
 /**
  * use aes to decrypt
  * @param cipherText
@@ -137,6 +176,75 @@ private static SecretKey secretKey;
     cipher.init(Cipher.DECRYPT_MODE, key,new IvParameterSpec(IV.getBytes(EncodeTypeEnum.UTF8.getValue())));
     return new String(cipher.doFinal(cipherText),EncodeTypeEnum.UTF8.getValue());
   }
+  /**
+	 * 将二进制转化为16进制字符串
+	 * 
+	 * @param b
+	 *            二进制字节数组
+	 * @return String
+	 */
+	private static final String byte2hex(byte[] b) {
+		String hs = "";
+		String stmp = "";
+		for (int n = 0; n < b.length; n++) {
+			stmp = (java.lang.Integer.toHexString(b[n] & 0XFF));
+			if (stmp.length() == 1) {
+				hs = hs + "0" + stmp;
+			} else {
+				hs = hs + stmp;
+			}
+		}
+		return hs.toUpperCase();
+	}
+public static byte[] parseHexStr2Byte(String hexStr) {     
+      if (hexStr.length() < 1)     
+              return null;     
+      byte[] result = new byte[hexStr.length()/2];     
+      for (int i = 0;i< hexStr.length()/2; i++) {     
+              int value = Integer.parseInt(hexStr.substring(i*2, i*2+2), 16);     
+              result[i] = (byte)value;     
+      }     
+      return result;     
+	}    
+private static final byte[] hex2byte(String hex) {
+		byte[] ret = new byte[8];
+		byte[] tmp = hex.getBytes();
+		for (int i = 0; i < 8; i++) {
+			ret[i] = uniteBytes(tmp[i * 2], tmp[i * 2 + 1]);
+		}
+		return ret;
+	}
+private static final byte uniteBytes(byte src0, byte src1) {
+		byte _b0 = Byte.decode("0x" + new String(new byte[] { src0 }))
+				.byteValue();
+		_b0 = (byte) (_b0 << 4);
+		byte _b1 = Byte.decode("0x" + new String(new byte[] { src1 }))
+				.byteValue();
+		byte ret = (byte) (_b0 ^ _b1);
+		return ret;
+	}
+public static SecretKey getKey(String strKey) {  
+    try {             
+        KeyGenerator _generator = KeyGenerator.getInstance("AES");  
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");  
+        secureRandom.setSeed(strKey.getBytes());  
+        _generator.init(128,secureRandom);  
+        return _generator.generateKey();  
+    } catch (Exception e) {  
+        throw new RuntimeException("初始化密钥出现异常");  
+    }  
+  }   
+public static String parseByte2HexStr(byte buf[]) {  
+    StringBuffer sb = new StringBuffer();  
+    for (int i = 0; i < buf.length; i++) {  
+        String hex = Integer.toHexString(buf[i] & 0xFF);  
+        if (hex.length() == 1) {  
+            hex = '0' + hex;  
+        }  
+        sb.append(hex.toUpperCase());  
+    }  
+    return sb.toString();  
+}  
 //	// //////////////////////////////////////////////////////////////////////////
 //	
 //	private static final SecretKey key = createSecretKey("DES");
@@ -370,26 +478,7 @@ private static SecretKey secretKey;
 //		}
 //	}
 //
-	/**
-	 * 将二进制转化为16进制字符串
-	 * 
-	 * @param b
-	 *            二进制字节数组
-	 * @return String
-	 */
-	private static final String byte2hex(byte[] b) {
-		String hs = "";
-		String stmp = "";
-		for (int n = 0; n < b.length; n++) {
-			stmp = (java.lang.Integer.toHexString(b[n] & 0XFF));
-			if (stmp.length() == 1) {
-				hs = hs + "0" + stmp;
-			} else {
-				hs = hs + stmp;
-			}
-		}
-		return hs.toUpperCase();
-	}
+	
 
 //	/**
 //	 * 十六进制字符串转化为2进制
