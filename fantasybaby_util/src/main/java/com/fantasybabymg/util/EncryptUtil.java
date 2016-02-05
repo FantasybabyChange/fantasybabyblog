@@ -81,11 +81,14 @@ public final class EncryptUtil {
 	      byte[] cipher = encrypt_AES_ECB(plaintext);
 	      System.out.println(byte2hex(cipher));
 	      System.out.println(ArrayUtils.toString(cipher));;
-
+	      String encrypt = encrypt(plaintext,"123");
+	      System.out.println(encrypt);
 	      System.out.print("cipher:  ");
 	      StringBuffer sb = new StringBuffer();
 	      String parseByte2HexStr = parseByte2HexStr(cipher);
 	      String byte2hex = byte2hex(cipher);
+	      String decrypt = decrypt(encrypt, "123");
+	      System.out.println(decrypt+" decrypt ");
 	      System.out.println(parseByte2HexStr+"--------1");
 	      System.out.println(byte2hex+"--------2");
 	      System.out.println("-------------------------");
@@ -131,6 +134,30 @@ private static SecretKey secretKey;
 	  }
 	  return cipher.doFinal(plainText.getBytes(EncodeTypeEnum.UTF8.getValue()));
   }
+  public static String decrypt(String aft_aes, String password) {  
+      try {  
+          byte[] content = parseHexStr2Byte(aft_aes);  
+          SecretKey secretKey = getKey(password);  
+          byte[] enCodeFormat = secretKey.getEncoded();  
+          SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");  
+          Cipher cipher = Cipher.getInstance("AES");// 创建密码器  
+          cipher.init(Cipher.DECRYPT_MODE, key);// 初始化  
+          byte[] result = cipher.doFinal(content);  
+          String bef_aes = new String(result);  
+          return bef_aes; // 加密  
+      } catch (NoSuchAlgorithmException e) {  
+          e.printStackTrace();  
+      } catch (NoSuchPaddingException e) {  
+          e.printStackTrace();  
+      } catch (InvalidKeyException e) {  
+          e.printStackTrace();  
+      } catch (IllegalBlockSizeException e) {  
+          e.printStackTrace();  
+      } catch (BadPaddingException e) {  
+          e.printStackTrace();  
+      }  
+      return null;  
+  }  
   public static String encrypt(String bef_aes, String password) {  
       byte[] byteContent = null;  
       try {  
