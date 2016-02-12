@@ -42,6 +42,7 @@ public class LoginAction extends BaseAction{
 		Object attribute = session.getAttribute(UserMessageConstant.RETURN_ERROR_KEY);
 		if(attribute != null ){
 			req.setAttribute(UserMessageConstant.RETURN_ERROR_KEY, attribute.toString());
+			session.removeAttribute(UserMessageConstant.RETURN_ERROR_KEY);
 		}
 		
 		return "login";
@@ -134,5 +135,9 @@ public class LoginAction extends BaseAction{
 			}
 		}
 		return ActionReturnConst.REDIRECT + "show";
+	}
+	@RequestMapping(value="/loginout",method=RequestMethod.POST)
+	public String loginOut(){
+		return null;
 	}
 }

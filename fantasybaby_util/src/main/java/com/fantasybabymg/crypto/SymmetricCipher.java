@@ -15,6 +15,7 @@ import java.security.SecureRandom;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
@@ -133,11 +134,11 @@ public class SymmetricCipher {
 		  String cryptoModeName,String paddingName){
 	  try {
 		Cipher cipher = getCipher(password, algorithmName, cryptoModeName, paddingName,Cipher.ENCRYPT_MODE);
-		CipherOutputStream cou = new CipherOutputStream(outputFile, cipher);
+		CipherInputStream cin = new CipherInputStream(encryptFile, cipher);
 		StopWatch sw = new StopWatch();
 		_logger.info("start encry file ");
 		sw.start();
-		FileUtils.copyFile(encryptFile, cou);
+		FileUtils.copyFile(cin, outputFile);
 		sw.stop();
 		_logger.info("end encry file "+sw.getTime());
 	} catch (Exception e) {
@@ -258,7 +259,7 @@ public   void decryptFile(File decryptFile,File outputFile){
    * @param strKey
    * @return
    */
-  public static SecretKeySpec getKey(String strKey,String algorithmName) {  
+  private  SecretKeySpec getKey(String strKey,String algorithmName) {  
 	    try {             
 	        KeyGenerator _generator = KeyGenerator.getInstance(algorithmName);  
 	        SecureRandom secureRandom = SecureRandom.getInstance(SECURERANDOM_ALGORITHM_NAME);  
