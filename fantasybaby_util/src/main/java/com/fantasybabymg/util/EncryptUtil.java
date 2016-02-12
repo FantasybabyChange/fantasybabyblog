@@ -1,26 +1,17 @@
 package com.fantasybabymg.util;
 
 import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.util.Base64;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.log4j.Logger;
 
 import com.fantasybabymg.enumerate.EncodeTypeEnum;
-import com.fantasybabymg.enumerate.EncryptionType;
+import com.fantasybabymg.enumerate.crypto.AlgorithmInstanceEnum;
 
 public final class EncryptUtil {
+	private static Logger _logger = Logger.getLogger(EncryptUtil.class);
 	/**
 	 * 进行MD5加密
 	 * 
@@ -32,7 +23,7 @@ public final class EncryptUtil {
 		byte[] digesta = null;
 		try {
 			// 得到一个md5的消息摘要
-			MessageDigest alga = MessageDigest.getInstance("MD5");
+			MessageDigest alga = MessageDigest.getInstance(AlgorithmInstanceEnum.MD5.getValue());
 			// 添加要进行计算摘要的信息
 			alga.update(info.getBytes());
 			// 得到该摘要
@@ -56,7 +47,7 @@ public final class EncryptUtil {
 		byte[] digesta = null;
 		try {
 			// 得到一个SHA-1的消息摘要
-			MessageDigest alga = MessageDigest.getInstance("SHA-1");
+			MessageDigest alga = MessageDigest.getInstance(AlgorithmInstanceEnum.SHA_1.getValue());
 			// 添加要进行计算摘要的信息
 			alga.update(info.getBytes());
 			// 得到该摘要
@@ -67,162 +58,37 @@ public final class EncryptUtil {
 		// 将摘要转为字符串
 		return byte2hex(digesta);
 	}
-
-	
-	private static String IV = "AAAAAAAAAAAAAAAA";
-	  static String plaintext = "123"; /*Note null padding*/
-	  static String encryptionKey = "0123456789abcdef";
-	  public static void main(String [] args) {
-	    try {
-	      
-	      System.out.println("==Java==");
-	      System.out.println("plain:   " + plaintext);
-
-	      byte[] cipher = encrypt_AES_ECB(plaintext);
-	      System.out.println(byte2hex(cipher));
-	      System.out.println(ArrayUtils.toString(cipher));;
-	      String encrypt = encrypt(plaintext,"123");
-	      System.out.println(encrypt);
-	      System.out.print("cipher:  ");
-	      StringBuffer sb = new StringBuffer();
-	      String parseByte2HexStr = parseByte2HexStr(cipher);
-	      String byte2hex = byte2hex(cipher);
-	      String decrypt = decrypt(encrypt, "123");
-	      System.out.println(decrypt+" decrypt ");
-	      System.out.println(parseByte2HexStr+"--------1");
-	      System.out.println(byte2hex+"--------2");
-	      System.out.println("-------------------------");
-	      System.out.println(ArrayUtils.toString(parseHexStr2Byte(parseByte2HexStr)));
-	      System.out.println(ArrayUtils.toString(hex2byte(byte2hex)));
-	      
-	      String decrypted = decrypt_AES(cipher, encryptionKey);
-
-	      System.out.println("decrypt: " + decrypted);
-
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	    } 
-	  }
-private static Cipher cipher;
-private final static String KEY_ALGORITHM = "AES";
-private static SecretKey secretKey;  
-/**
- * use aes to encrypt a string
- * @param plainText
- * @param encryptionKey
- * @return
- * @throws Exception
- */
-  public synchronized  static byte[] encrypt_AES_ECB(String plainText) throws Exception {
-	 return encrypt_AES_ECB(plainText,EncryptionType.ENCRYP.getValue());
-  }
-/**
- * use aes to encrypt a string
- * @param plainText
- * @param encryptionKey
- * @return
- * @throws Exception
- */
-  public synchronized  static byte[] encrypt_AES_ECB(String plainText,int type) throws Exception {
-	  cipher = Cipher.getInstance(KEY_ALGORITHM);  
-      secretKey = KeyGenerator.getInstance(KEY_ALGORITHM).generateKey();
-	  if(type == EncryptionType.ENCRYP.getValue()){
-		  cipher.init(Cipher.ENCRYPT_MODE, secretKey);//使用加密模式初始化 密钥
-	  }else{
-		  cipher.init(Cipher.DECRYPT_MODE, secretKey);
-		  
-	  }
-	  return cipher.doFinal(plainText.getBytes(EncodeTypeEnum.UTF8.getValue()));
-  }
-  public static String decrypt(String aft_aes, String password) {  
-      try {  
-          byte[] content = parseHexStr2Byte(aft_aes);  
-          SecretKey secretKey = getKey(password);  
-          byte[] enCodeFormat = secretKey.getEncoded();  
-          SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");  
-          Cipher cipher = Cipher.getInstance("AES");// 创建密码器  
-          cipher.init(Cipher.DECRYPT_MODE, key);// 初始化  
-          byte[] result = cipher.doFinal(content);  
-          String bef_aes = new String(result);  
-          return bef_aes; // 加密  
-      } catch (NoSuchAlgorithmException e) {  
-          e.printStackTrace();  
-      } catch (NoSuchPaddingException e) {  
-          e.printStackTrace();  
-      } catch (InvalidKeyException e) {  
-          e.printStackTrace();  
-      } catch (IllegalBlockSizeException e) {  
-          e.printStackTrace();  
-      } catch (BadPaddingException e) {  
-          e.printStackTrace();  
-      }  
-      return null;  
-  }  
-  public static String encrypt(String bef_aes, String password) {  
-      byte[] byteContent = null;  
-      try {  
-          byteContent = bef_aes.getBytes("utf-8");  
-      } catch (UnsupportedEncodingException e) {  
-          e.printStackTrace();  
-      }  
-      return encrypt(byteContent,password);  
-  }  
-  public static String encrypt(byte[] content, String password) {  
-      try {  
-          SecretKey secretKey = getKey(password);  
-          byte[] enCodeFormat = secretKey.getEncoded();  
-          SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");  
-          Cipher cipher = Cipher.getInstance("AES");// 创建密码器  
-          cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化  
-          byte[] result = cipher.doFinal(content);  
-          String aft_aes = parseByte2HexStr(result);  
-          return aft_aes; // 加密  
-      } catch (NoSuchAlgorithmException e) {  
-          e.printStackTrace();  
-      } catch (NoSuchPaddingException e) {  
-          e.printStackTrace();  
-      } catch (InvalidKeyException e) {  
-          e.printStackTrace();  
-      } catch (IllegalBlockSizeException e) {  
-          e.printStackTrace();  
-      } catch (BadPaddingException e) {  
-          e.printStackTrace();  
-      }  
-      return null;  
-  }  
-/**
- * use aes to decrypt
- * @param cipherText
- * @param encryptionKey
- * @return
- * @throws Exception
- */
-  public static String decrypt_AES(byte[] cipherText, String encryptionKey) throws Exception{
-    Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding", "SunJCE");
-    SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes(EncodeTypeEnum.UTF8.getValue()), "AES");
-    cipher.init(Cipher.DECRYPT_MODE, key,new IvParameterSpec(IV.getBytes(EncodeTypeEnum.UTF8.getValue())));
-    return new String(cipher.doFinal(cipherText),EncodeTypeEnum.UTF8.getValue());
-  }
-  /**
-	 * 将二进制转化为16进制字符串
-	 * 
-	 * @param b
-	 *            二进制字节数组
-	 * @return String
-	 */
-	private static final String byte2hex(byte[] b) {
-		String hs = "";
-		String stmp = "";
-		for (int n = 0; n < b.length; n++) {
-			stmp = (java.lang.Integer.toHexString(b[n] & 0XFF));
-			if (stmp.length() == 1) {
-				hs = hs + "0" + stmp;
-			} else {
-				hs = hs + stmp;
-			}
-		}
-		return hs.toUpperCase();
-	}
+/**  
+    * 编码   Base64
+    * @param bstr  
+    * @return String  
+ * @throws UnsupportedEncodingException 
+    */    
+   public static String encodeBase64(String str) throws UnsupportedEncodingException{    
+	   return Base64.getEncoder().encodeToString(str.getBytes(EncodeTypeEnum.UTF8.getValue()));   
+   }    
+	   
+   /**  
+    * 解码  Base64
+    * @param str  
+    * @return string  
+ * @throws UnsupportedEncodingException 
+    */    
+   public static String decodeBase64(String decodeStr) throws UnsupportedEncodingException{    
+	   return new String(Base64.getDecoder().decode(decodeStr),EncodeTypeEnum.UTF8.getValue());     
+   }
+  
+ public static String parseByte2HexStr(byte buf[]) {  
+	    StringBuffer sb = new StringBuffer();  
+	    for (int i = 0; i < buf.length; i++) {  
+	        String hex = Integer.toHexString(buf[i] & 0xFF);  
+	        if (hex.length() == 1) {  
+	            hex = '0' + hex;  
+        }  
+        sb.append(hex.toUpperCase());  
+    }  
+    return sb.toString();  
+}  
 public static byte[] parseHexStr2Byte(String hexStr) {     
       if (hexStr.length() < 1)     
               return null;     
@@ -233,7 +99,27 @@ public static byte[] parseHexStr2Byte(String hexStr) {
       }     
       return result;     
 	}    
-private static final byte[] hex2byte(String hex) {
+/**
+ * 将二进制转化为16进制字符串
+ * 
+ * @param b
+ *            二进制字节数组
+ * @return String
+ */
+private static final String byte2hex(byte[] b) {
+	String hs = "";
+	String stmp = "";
+	for (int n = 0; n < b.length; n++) {
+		stmp = (java.lang.Integer.toHexString(b[n] & 0XFF));
+		if (stmp.length() == 1) {
+			hs = hs + "0" + stmp;
+		} else {
+			hs = hs + stmp;
+		}
+	}
+	return hs.toUpperCase();
+}
+/*private static final byte[] hex2byte(String hex) {
 		byte[] ret = new byte[8];
 		byte[] tmp = hex.getBytes();
 		for (int i = 0; i < 8; i++) {
@@ -249,29 +135,8 @@ private static final byte uniteBytes(byte src0, byte src1) {
 				.byteValue();
 		byte ret = (byte) (_b0 ^ _b1);
 		return ret;
-	}
-public static SecretKey getKey(String strKey) {  
-    try {             
-        KeyGenerator _generator = KeyGenerator.getInstance("AES");  
-        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");  
-        secureRandom.setSeed(strKey.getBytes());  
-        _generator.init(128,secureRandom);  
-        return _generator.generateKey();  
-    } catch (Exception e) {  
-        throw new RuntimeException("初始化密钥出现异常");  
-    }  
-  }   
-public static String parseByte2HexStr(byte buf[]) {  
-    StringBuffer sb = new StringBuffer();  
-    for (int i = 0; i < buf.length; i++) {  
-        String hex = Integer.toHexString(buf[i] & 0xFF);  
-        if (hex.length() == 1) {  
-            hex = '0' + hex;  
-        }  
-        sb.append(hex.toUpperCase());  
-    }  
-    return sb.toString();  
-}  
+	}*/
+
 //	// //////////////////////////////////////////////////////////////////////////
 //	
 //	private static final SecretKey key = createSecretKey("DES");
