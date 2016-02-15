@@ -113,6 +113,7 @@ CREATE TABLE blog_user
    STATUS               TINYINT,
    create_date          DATETIME,
    modify_date          DATETIME,
+   login_date           DATETIME,
    PRIMARY KEY (_id)
 )ENGINE = INNODB;
 

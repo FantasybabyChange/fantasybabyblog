@@ -10,6 +10,7 @@
   	    <result column="status" property="status" />
   	    <result column="create_date" property="createDate" />
   	    <result column="modify_date" property="modifyDate" />
+  	    <result column="login_date" property="loginDate" />
   	    <association property="userDetail" column="ud" javaType="userDetail">
 	  	    <result column="name" property="name" />
 	  	    <result column="nickname" property="nickname" />
@@ -39,7 +40,7 @@
   		#{category.categoryCode},now());
   	</insert>
   	<select id="findUserAllInformation" parameterType="map" resultMap="userMap">
-  		SELECT bu.`_id`,bu.`username`,bu.`PASSWORD`,bu.`STATUS`,bu.`create_date`,bu.`modify_date`,
+  		SELECT bu.`_id`,bu.`username`,bu.`PASSWORD`,bu.`STATUS`,bu.`create_date`,bu.`modify_date`,bu.`login_date`,ss
 				ud.`NAME`,ud.`nickname`,ud.`phone`,ud.`profession`,ud.`address`,ud.`hometown`,ud.`image`,ud.`sex`,
 				ca.`categoryname`
 				FROM blog_user bu LEFT JOIN user_detail ud ON bu.`_id` = ud.`userid`
@@ -73,8 +74,8 @@
   	<delete id="deleteUser"  parameterType="int">
   		delete from blog_user where _id=#{id}
   	</delete>
-  	<!-- <update id="update" parameterType="account">
-     	update t_account
+  	<update id="updateUser" parameterType="user">
+     	update blog_user
 		<set>
 			<if test="name != null and name != '' ">
 				NAME = #{name},
@@ -90,7 +91,7 @@
 			</if>
 		</set>
 		where ID = #{id}
-  	</update> -->
+  	</update>
   	
   	<!-- <select id="load"  parameterType="int" resultType="account">
 		select * from t_account where id=#{id}

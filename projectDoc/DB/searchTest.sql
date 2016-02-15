@@ -6,6 +6,9 @@ SELECT p.pname FROM blog_user bu,_category c,category_privilege cp,_privilege p
 WHERE bu.categorycode=c.categorycode AND c.categorycode=cp.categorycode AND cp.privilegecode=p.pcode
 AND bu._id=1
 SELECT *FROM blog_user;
+DESC blog_user;
+UPDATE blog_user SET login_date=NOW() WHERE _id=1
+SELECT *FROM user_detail;
 SELECT *FROM _category;
 SELECT *FROM _privilege GROUP BY parent;
 DESC _privilege;

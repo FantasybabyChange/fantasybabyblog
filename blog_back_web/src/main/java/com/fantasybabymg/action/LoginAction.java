@@ -129,6 +129,7 @@ public class LoginAction extends BaseAction{
 			return ActionReturnConst.REDIRECT+"show";
 		}else{
 			if(EncryptUtil.encryptToMD5(userlogin.getPassword()).equals(blogUser.getPassWord())){
+				
 				return ActionReturnConst.REDIRECT + ActionReturnConst.REQUEST_BACK_MAPPING + "/index/show";
 			}else{
 				session.setAttribute(UserMessageConstant.RETURN_ERROR_KEY,UserMessageConstant.PASSWORD_NOT_RIGHT );

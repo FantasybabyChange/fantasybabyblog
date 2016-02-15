@@ -23,6 +23,7 @@ public class BlogUser implements java.io.Serializable {
 	private Category category;
 	private Date createDate;
 	private Date modifyDate;
+	private Date loginDate;
 	public BlogUser() {
 	}
 	public String get_uuid() {
@@ -78,6 +79,12 @@ public class BlogUser implements java.io.Serializable {
 	}
 	public void set_id(int _id) {
 		this._id = _id;
+	}
+	public Date getLoginDate() {
+		return loginDate;
+	}
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
 	}
 	@Override
 	public String toString() {
