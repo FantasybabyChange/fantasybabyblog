@@ -77,6 +77,7 @@ public class LoginAction extends BaseAction{
 		userCriterion.setCriterion(userLogin);
 		SystemContext.setCriterionMap(userCriterion);
 		BlogUser blogUser = userService.findUser();
+		SystemContext.removeCriterionMap();
 		if(blogUser == null){
 			rebackJson.put(UserMessageConstant.RETURN_ERROR_KEY,UserMessageConstant.USER_NOT_EXIST );
 			return om.writeValueAsString(rebackJson);
